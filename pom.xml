@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>lk.channelling</groupId>
-	<artifactId>Channelling-App-Api</artifactId>
+	<artifactId>Channelling-api-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Channelling-App-Api</name>
 	<description>Doctor Channelling Application</description>
