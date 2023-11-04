@@ -28,7 +28,7 @@ public class UserController {
 	public ResponseEntity<?> getUserById(@PathVariable Long id) {
 
 		Optional<User> user = userService.findById(id);
-		a
+		
 		log.info("id : {}", id);
 
 		if (user.isPresent())
