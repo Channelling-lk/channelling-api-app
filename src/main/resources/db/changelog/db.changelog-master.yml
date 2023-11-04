@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - include:
+      file: classpath:/db/changelog/001-initial-schema.yml
+      file: classpath:/db/changelog/002-user-table.yml
+  # Add more include statements for additional changelog files if needed
