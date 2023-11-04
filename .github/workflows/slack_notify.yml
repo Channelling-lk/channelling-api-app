@@ -1,0 +1,21 @@
+name: Slack Notification
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Slack notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{
+            "text": "Workflow ${{ github.workflow }} in repo ${{ github.repository }} has status ${{ job.status }}.",
+            "channel": "#deployment"
+          }' $SLACK_WEBHOOK_URL
