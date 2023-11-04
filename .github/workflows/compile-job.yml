@@ -33,13 +33,4 @@ jobs:
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
-    - name: Send Slack notification
-      env:
-          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
-      run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{
-            "text": "Compilation ${{ env.JOB_STATUS }} in repo ${{ github.repository }}.",
-            "channel": "#deployment"
-          }' $SLACK_WEBHOOK_URL
+      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6 
