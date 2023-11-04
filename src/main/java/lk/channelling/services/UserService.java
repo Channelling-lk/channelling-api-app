@@ -8,6 +8,6 @@ import lk.channelling.model.User;
 
 @Service
 public interface UserService {
-	Optional<User> findById(Long id);
+	Optional<User> findById(Long id) throws Exception;
 
 }

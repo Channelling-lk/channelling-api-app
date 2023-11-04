@@ -25,11 +25,9 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getUserById(@PathVariable Long id) {
+	public ResponseEntity<?> getUserById(@PathVariable Long id) throws Exception {
 
 		Optional<User> user = userService.findById(id);
-		
-		log.info("id : {}", id);
 
 		if (user.isPresent())
 			return new ResponseEntity<>(user, HttpStatus.OK);
