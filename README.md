@@ -1,1 +1,1 @@
-# channelling-app
+# channelling-api-app
