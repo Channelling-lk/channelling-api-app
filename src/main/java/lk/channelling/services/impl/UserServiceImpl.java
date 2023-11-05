@@ -14,13 +14,17 @@ import lk.channelling.services.UserService;
 @Transactional(rollbackOn = Exception.class)
 public class UserServiceImpl implements UserService {
 
-	@Autowired
-	private UserRepository userRepository;
+    private UserRepository userRepository;
 
-	@Override
-	public Optional<User> findById(Long id) throws Exception {
-		return userRepository.findById(id);
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-	}
+    @Override
+    public Optional<User> findById(Long id) throws Exception {
+        return userRepository.findById(id);
+
+    }
 
 }

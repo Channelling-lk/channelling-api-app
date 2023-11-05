@@ -21,18 +21,22 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class UserController {
 
-	@Autowired
-	private UserService userService;
+    private UserService userService;
 
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getUserById(@PathVariable Long id) throws Exception {
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
-		Optional<User> user = userService.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id) throws Exception {
 
-		if (user.isPresent())
-			return new ResponseEntity<>(user, HttpStatus.OK);
-		else
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
+        Optional<User> user = userService.findById(id);
+
+        if (user.isPresent())
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 
 }
