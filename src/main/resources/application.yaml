@@ -11,4 +11,20 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none  # Optional: Disable Hibernate's automatic schema creation
+      ddl-auto: none
+
+  security:
+    user:
+      name: user
+      password: user123
+    filter:
+      order: 10
+
+application:
+  security:
+    jwt:
+      secret:
+        key: 743777217A25432A462D4A614E635266556A586E3272357538782F413F442847
+        expiration: 86400000 # 1 day
+        refresh-token:
+          expiration: 604800000 # 7 days

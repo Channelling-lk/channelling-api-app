@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import jakarta.transaction.Transactional;
-import lk.channelling.model.User;
 import lk.channelling.repository.UserRepository;
 import lk.channelling.services.UserService;
 

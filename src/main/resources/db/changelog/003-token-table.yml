@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ChinthakaMa
+      changes:
+        - createTable:
+            tableName: token
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_token
+              - column:
+                  name: token
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+              - column:
+                  name: revoked
+                  type: BIT(1)
+              - column:
+                  name: expired
+                  type: BIT(1)
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_token_user
+                    referencedTableName: user
+                    referencedColumnNames: id
+                    deleteCascade: true
+                    validateForeignKey: true
+
+
