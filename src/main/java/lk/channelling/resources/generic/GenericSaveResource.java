@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lk.channelling.config;
+package lk.channelling.resources.generic;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import lombok.Data;
 
-@Configuration
-public class SecurityConfig {
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().anyRequest();
-    }
+@Data
+@JsonSerialize
+public class GenericSaveResource {
+
+    private String id;
+
+    @NotBlank
+    @Pattern(regexp = "ACTIVE|INACTIVE")
+    private String status;
 }

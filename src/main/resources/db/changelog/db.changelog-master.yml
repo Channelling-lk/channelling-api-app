@@ -1,6 +1,4 @@
 databaseChangeLog:
   - include:
-      file: classpath:/db/changelog/001-initial-schema.yml
-      file: classpath:/db/changelog/002-user-table.yml
-      file: classpath:/db/changelog/003-token-table.yml
+      file: classpath:/db/changelog/001-country.yml
   # Add more include statements for additional changelog files if needed

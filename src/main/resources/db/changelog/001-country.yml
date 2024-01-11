@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ChinthakaMa
+      changes:
+        - createTable:
+            tableName: country
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: iso_code
+                  type: varchar(10)
+              - column:
+                  name: status
+                  type: varchar(15)
+                  defaultValue: ACTIVE
+              - column:
+                  name: created_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: datetime
+                  defaultValueComputed: 'CURRENT_TIMESTAMP'
+              - column:
+                  name: modified_user
+                  type: varchar(255)
+              - column:
+                  name: modified_date
+                  type: datetime
+              - column:
+                  name: version
+                  type: int
