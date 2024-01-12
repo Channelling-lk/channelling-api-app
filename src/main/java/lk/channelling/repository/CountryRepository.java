@@ -19,6 +19,8 @@ import lk.channelling.entity.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Repository interface for managing and accessing country information.
  *
@@ -33,5 +35,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
+
+    Optional<Country> findByCode(String code);
 
 }

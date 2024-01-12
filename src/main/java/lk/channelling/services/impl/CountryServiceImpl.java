@@ -16,18 +16,21 @@
 package lk.channelling.services.impl;
 
 import lk.channelling.entity.Country;
+import lk.channelling.exception.ObjectNotUniqueException;
+import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.CountryRepository;
 import lk.channelling.services.CountryService;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @Transactional(rollbackFor = Exception.class)
-@Slf4j
+@Log4j2
 public class CountryServiceImpl implements CountryService {
 
     private CountryRepository countryRepository;
@@ -40,5 +43,19 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public List<Country> findAll() {
         return countryRepository.findAll();
+    }
+
+    @Override
+    public Country save(Country country) {
+        LoginAuthenticationHandler.validateUser();
+
+        country.setCreatedUser(LoginAuthenticationHandler.getUserName());
+
+        Optional<Country> fetchedCountry = countryRepository.findByCode(country.getCode());
+
+        if (fetchedCountry.isPresent())
+            throw new ObjectNotUniqueException();
+
+        return countryRepository.saveAndFlush(country);
     }
 }

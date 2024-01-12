@@ -71,7 +71,7 @@ public class LoggingHandler {
 
         String requestId = httpRequest.getHeader("x-request-id");
         String apiName = httpRequest.getRequestURI();
-        String userName = httpRequest.getHeader("username");
+        String userName = httpRequest.getHeader("user-name");
 
         Object[] methodParams = joinPoint.getArgs();
         LogRequest.getInstance().setRequestId(requestId);

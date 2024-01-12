@@ -40,4 +40,12 @@ public interface CountryService {
      * @return A list containing all countries.
      */
     List<Country> findAll();
+
+    /**
+     * Saves the given country.
+     *
+     * @param country The country object to be saved.
+     * @return The saved country.
+     */
+    Country save(Country country);
 }

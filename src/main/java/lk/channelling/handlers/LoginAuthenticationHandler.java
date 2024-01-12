@@ -32,8 +32,6 @@ import lombok.Setter;
  * @version 1.0
  * @since 1.0
  */
-@Getter
-@Setter
 public class LoginAuthenticationHandler {
 
     /**
@@ -44,7 +42,9 @@ public class LoginAuthenticationHandler {
     /**
      * The username.
      */
-    private String userName;
+    @Getter
+    @Setter
+    private static String userName;
 
     /**
      * Retrieves the singleton instance of the class. If the instance does not
@@ -61,10 +61,8 @@ public class LoginAuthenticationHandler {
         return instance;
     }
 
-   public void validateUser()
-   {
-       if (userName == null)
-           throw new UserNotFoundException();
-   }
+    public static void validateUser() {
+        if (userName == null) throw new UserNotFoundException();
+    }
 
 }

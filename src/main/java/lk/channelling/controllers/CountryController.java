@@ -20,6 +20,7 @@ import lk.channelling.entity.Country;
 import lk.channelling.services.CountryService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,7 +39,7 @@ import java.util.List;
  * @since 1.0
  */
 @RestController
-@RequestMapping("/api/country")
+@RequestMapping("/api/countries/v1")
 @CrossOrigin(origins = "*")
 @Log4j2
 public class CountryController {
@@ -47,6 +48,13 @@ public class CountryController {
      * The country service for handling country related business logic.
      */
     private CountryService countryService;
+
+    /**
+     * The environment object is used to maintain the current state of the running application.
+     */
+
+
+    private Environment environment;
 
     /**
      * Injects the CountryService reference.
@@ -58,12 +66,18 @@ public class CountryController {
         this.countryService = countryService;
     }
 
+    @Autowired
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
+
+
     /**
      * Handles HTTP Get requests to retrieve details of all countries.
      *
      * @return The details of all countries as a Response Entity.
      */
-    @GetMapping(value = "/v1/all")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<Country>> findAll() {
         List<Country> countries = countryService.findAll();
 
@@ -74,8 +88,15 @@ public class CountryController {
         }
     }
 
-    @PostMapping("/v1")
+    /**
+     * Endpoint to save a new country.
+     *
+     * @param country A DTO (Data Transfer Object) representing the country data to be saved.
+     * @return ResponseEntity with the saved country and HTTP status.
+     */
+    @PostMapping("/save")
     public ResponseEntity<Object> save(@Valid @RequestBody Country country) {
-
+        Country savedCountry = countryService.save(country);
+        return new ResponseEntity<>(savedCountry, HttpStatus.OK);
     }
 }

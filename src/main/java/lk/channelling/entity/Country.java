@@ -16,6 +16,8 @@
 
 package lk.channelling.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import lk.channelling.enums.Status;
 import lombok.Data;
@@ -32,6 +34,7 @@ import java.sql.Timestamp;
  * @version 1.0
  * @since 1.0
  */
+@JsonSerialize
 @Entity
 @Data
 @Table(name = "country")
@@ -44,6 +47,7 @@ public class Country {
 
     private String code;
     private String description;
+
     @Column(name = "iso_code")
     private String isoCode;
 
@@ -63,6 +67,7 @@ public class Country {
     @Column(name = "modified_date")
     private Timestamp modifiedDate;
 
+    @JsonIgnore
     @Version
     private Long version;
 }
