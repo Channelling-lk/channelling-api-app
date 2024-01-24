@@ -1,4 +1,4 @@
-package lk.channelling.util;
+package lk.channelling.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

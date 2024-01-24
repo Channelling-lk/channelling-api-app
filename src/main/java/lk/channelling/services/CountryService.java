@@ -16,6 +16,7 @@
 package lk.channelling.services;
 
 import lk.channelling.entity.Country;
+import lk.channelling.enums.Status;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,6 +42,12 @@ public interface CountryService {
      */
     List<Country> findAll();
 
+    Country findById(Long id);
+
+    Country findByCode(String code);
+
+    List<Country> findByStatus(Status status);
+
     /**
      * Saves the given country.
      *
@@ -48,4 +55,8 @@ public interface CountryService {
      * @return The saved country.
      */
     Country save(Country country);
+
+    void delete(Long id);
+
+    Country update(Long id, Country country);
 }

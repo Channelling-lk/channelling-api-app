@@ -13,18 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lk.channelling.resources.generic;
+package lk.channelling.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.AllArgsConstructor;
 
-@JsonSerialize
-@AllArgsConstructor
-public class ErrorResponse implements Response {
-    @JsonProperty("error_code")
-    private String errorCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-    @JsonProperty("error_message")
-    private String errorMessage;
+import java.util.Date;
+import java.util.List;
+
+@Getter
+@Setter
+@NoArgsConstructor
+public class ErrorResponse {
+
+    private Date timestamp;
+    private int status;
+    private List<String> errors;
 }

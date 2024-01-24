@@ -16,10 +16,13 @@
 package lk.channelling.services.impl;
 
 import lk.channelling.entity.Country;
+import lk.channelling.enums.Status;
 import lk.channelling.exception.ObjectNotUniqueException;
+import lk.channelling.exception.RecordNotFoundException;
 import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.CountryRepository;
 import lk.channelling.services.CountryService;
+import lk.channelling.util.TimeUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -46,16 +49,68 @@ public class CountryServiceImpl implements CountryService {
     }
 
     @Override
+    public Country findById(Long id) {
+        Optional<Country> country = countryRepository.findById(id);
+
+        if (!country.isPresent()) throw new RecordNotFoundException("No country record found for the id : " + id);
+
+        return country.get();
+    }
+
+    @Override
+    public Country findByCode(String code) {
+        Optional<Country> country = countryRepository.findByCode(code);
+
+        if (!country.isPresent()) throw new RecordNotFoundException("No country record found for the code : " + code);
+
+        return country.get();
+    }
+
+    @Override
+    public List<Country> findByStatus(Status status) {
+        return countryRepository.findByStatus(status);
+    }
+
+    @Override
     public Country save(Country country) {
         LoginAuthenticationHandler.validateUser();
 
         country.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        country.setStatus(Status.ACTIVE);
+        country.setCreatedDate(TimeUtil.getCurrentTimeStamp());
 
         Optional<Country> fetchedCountry = countryRepository.findByCode(country.getCode());
 
         if (fetchedCountry.isPresent())
-            throw new ObjectNotUniqueException();
+            throw new ObjectNotUniqueException("The entered country already exists in the database.");
 
         return countryRepository.saveAndFlush(country);
+    }
+
+
+    @Override
+    public void delete(Long id) {
+        Country fetchedCountry = findById(id);
+
+        if (fetchedCountry == null) throw new RecordNotFoundException("No country record found for the id : " + id);
+
+        countryRepository.delete(fetchedCountry);
+
+    }
+
+    @Override
+    public Country update(Long id, Country newCountry) {
+        LoginAuthenticationHandler.validateUser();
+
+        Optional<Country> updatedCountry = countryRepository.findById(id).map(country -> {
+            country.setDescription(newCountry.getDescription());
+            country.setModifiedUser(LoginAuthenticationHandler.getUserName());
+            country.setModifiedDate(TimeUtil.getCurrentTimeStamp());
+
+            return countryRepository.save(country);
+        });
+
+        if (updatedCountry.isPresent()) return updatedCountry.get();
+        throw new RecordNotFoundException("No country record found for the id : " + id);
     }
 }

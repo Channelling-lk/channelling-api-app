@@ -17,6 +17,7 @@ package lk.channelling.controllers;
 
 import jakarta.validation.Valid;
 import lk.channelling.entity.Country;
+import lk.channelling.enums.Status;
 import lk.channelling.services.CountryService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ import java.util.List;
  * @since 1.0
  */
 @RestController
-@RequestMapping("/api/countries/v1")
+@RequestMapping("/api/v1/countries")
 @CrossOrigin(origins = "*")
 @Log4j2
 public class CountryController {
@@ -71,32 +72,62 @@ public class CountryController {
         this.environment = environment;
     }
 
-
     /**
      * Handles HTTP Get requests to retrieve details of all countries.
      *
      * @return The details of all countries as a Response Entity.
      */
-    @GetMapping(value = "/all")
+    @GetMapping("/all")
     public ResponseEntity<List<Country>> findAll() {
         List<Country> countries = countryService.findAll();
 
-        if (countries.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(countries, HttpStatus.OK);
-        }
+        if (countries.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        return new ResponseEntity<>(countries, HttpStatus.OK);
+    }
+
+    @GetMapping("/id={id}")
+    public ResponseEntity<Country> findById(@PathVariable Long id) {
+        Country country = countryService.findById(id);
+        return new ResponseEntity<>(country, HttpStatus.OK);
+    }
+
+    @GetMapping("/code={code}")
+    public ResponseEntity<Country> findByCode(@PathVariable String code) {
+        Country country = countryService.findByCode(code);
+        return new ResponseEntity<>(country, HttpStatus.OK);
+    }
+
+    @GetMapping("/status={status}")
+    public ResponseEntity<List<Country>> findByStatus(@PathVariable Status status) {
+        List<Country> countries = countryService.findByStatus(status);
+
+        if (countries.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+
+        return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 
     /**
      * Endpoint to save a new country.
      *
-     * @param country A DTO (Data Transfer Object) representing the country data to be saved.
+     * @param country The country object representing the country data to be saved.
      * @return ResponseEntity with the saved country and HTTP status.
      */
     @PostMapping("/save")
-    public ResponseEntity<Object> save(@Valid @RequestBody Country country) {
+    public ResponseEntity<Country> save(@Valid @RequestBody Country country) {
         Country savedCountry = countryService.save(country);
         return new ResponseEntity<>(savedCountry, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCountry(@PathVariable Long id) {
+        countryService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Country> update(@PathVariable Long id, @Valid @RequestBody Country country) {
+        Country updatedCountry = countryService.update(id, country);
+        return new ResponseEntity<>(updatedCountry, HttpStatus.OK);
     }
 }

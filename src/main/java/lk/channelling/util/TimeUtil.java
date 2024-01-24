@@ -13,7 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lk.channelling.resources.generic;
+package lk.channelling.util;
 
-public interface Response {
+import java.sql.Timestamp;
+
+public class TimeUtil {
+
+    public static Timestamp getCurrentTimeStamp() {
+        return new Timestamp(System.currentTimeMillis());
+    }
 }
