@@ -1,6 +1,6 @@
 package lk.channelling.repository;
 
-import lk.channelling.model.User;
+import lk.channelling.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

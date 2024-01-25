@@ -1,6 +1,6 @@
 package lk.channelling.services;
 
-import lk.channelling.model.User;
+import lk.channelling.entity.User;
 import lk.channelling.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

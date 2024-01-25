@@ -16,9 +16,7 @@
 
 package lk.channelling.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -28,10 +26,10 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * Represents a Country with its details.
+ * Represents a Contact Method with its details.
  *
- * <p>This entity class hold information such as the country code, name, its iso code and other relevant details.
- * It is designed to be used in conjunction to persist and retrieve country information.</p>
+ * <p>This entity class hold information such as the Contact Method code, name, and other relevant details.
+ * It is designed to be used in conjunction to persist and retrieve Contact Method information.</p>
  *
  * @author Chinthaka Manathunga
  * @version 1.0
@@ -41,8 +39,8 @@ import java.io.Serializable;
 @JsonSerialize
 @Entity
 @Data
-@Table(name = "country")
-public class Country extends BaseEntity implements Serializable {
+@Table(name = "contact_method")
+public class ContactMethod extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -53,12 +51,4 @@ public class Country extends BaseEntity implements Serializable {
     @NotBlank(message = "Description is required.")
     @Size(max = 100, message = "Description should be less than {value} characters.")
     private String description;
-
-    @NotBlank(message = "Iso Code is required")
-    @Size(max = 10, message = "Iso Code should be less than {value} characters.")
-    @JsonProperty("iso_code")
-    @Column(name = "iso_code")
-    private String isoCode;
-
-
 }

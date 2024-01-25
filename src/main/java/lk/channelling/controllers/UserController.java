@@ -1,6 +1,6 @@
 package lk.channelling.controllers;
 
-import lk.channelling.model.User;
+import lk.channelling.entity.User;
 import lk.channelling.services.UserService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

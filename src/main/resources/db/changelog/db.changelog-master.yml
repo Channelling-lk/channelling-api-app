@@ -1,4 +1,5 @@
 databaseChangeLog:
   - include:
-      file: classpath:/db/changelog/001-country.yml
+      file: classpath:/db/changelog/001_country.yml
+      file: classpath:/db/changelog/002_contact_method.yml
   # Add more include statements for additional changelog files if needed

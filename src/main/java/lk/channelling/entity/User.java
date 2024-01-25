@@ -1,8 +1,7 @@
-package lk.channelling.model;
+package lk.channelling.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import lk.channelling.model.generic.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
