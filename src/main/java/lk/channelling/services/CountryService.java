@@ -42,10 +42,28 @@ public interface CountryService {
      */
     List<Country> findAll();
 
+    /**
+     * Returns the country by its id.
+     *
+     * @param id The id of the country
+     * @return the Country
+     */
     Country findById(Long id);
 
+    /**
+     * Returns the country by its code.
+     *
+     * @param code the code of the country.
+     * @return the Country
+     */
     Country findByCode(String code);
 
+    /**
+     * Returns the list of countries by its status.
+     *
+     * @param status the status, this should be either ACTIVE or INACTIVE.
+     * @return the list of countries.
+     */
     List<Country> findByStatus(Status status);
 
     /**
@@ -56,7 +74,19 @@ public interface CountryService {
      */
     Country save(Country country);
 
+    /**
+     * Deletes the country by its id.
+     *
+     * @param id the id of the country to be deleted.
+     */
     void delete(Long id);
 
+    /**
+     * Updates the given country id by the given details.
+     *
+     * @param id      the id of the country to be updated.
+     * @param country the country details which contains update details.
+     * @return the updated country details.
+     */
     Country update(Long id, Country country);
 }

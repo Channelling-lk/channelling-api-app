@@ -21,7 +21,6 @@ import lk.channelling.enums.Status;
 import lk.channelling.services.CountryService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +35,7 @@ import java.util.List;
  * data store. It may handle HTTP methods, request mapping , and model/view rendering in a web application context.</p>
  *
  * @author Chinthaka Manathunga
- * @verion 1.0
+ * @version 1.0
  * @since 1.0
  */
 @RestController
@@ -51,13 +50,6 @@ public class CountryController {
     private CountryService countryService;
 
     /**
-     * The environment object is used to maintain the current state of the running application.
-     */
-
-
-    private Environment environment;
-
-    /**
      * Injects the CountryService reference.
      *
      * @param countryService The country service to be injected.
@@ -65,11 +57,6 @@ public class CountryController {
     @Autowired
     public void setCountryService(CountryService countryService) {
         this.countryService = countryService;
-    }
-
-    @Autowired
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
     }
 
     /**
@@ -86,18 +73,36 @@ public class CountryController {
         return new ResponseEntity<>(countries, HttpStatus.OK);
     }
 
+    /**
+     * Returns {@code Country} by its id.
+     *
+     * @param id the id of the country.
+     * @return the Response Entity with country.
+     */
     @GetMapping("/id={id}")
     public ResponseEntity<Country> findById(@PathVariable Long id) {
         Country country = countryService.findById(id);
         return new ResponseEntity<>(country, HttpStatus.OK);
     }
 
+    /**
+     * Returns the country by its code.
+     *
+     * @param code The code of the country.
+     * @return The Response Entity with country object.
+     */
     @GetMapping("/code={code}")
     public ResponseEntity<Country> findByCode(@PathVariable String code) {
         Country country = countryService.findByCode(code);
         return new ResponseEntity<>(country, HttpStatus.OK);
     }
 
+    /**
+     * Returns the list of country by the given status.
+     *
+     * @param status The status of the country. It should be either ACTIVE or INACTIVE.
+     * @return the List of countries.
+     */
     @GetMapping("/status={status}")
     public ResponseEntity<List<Country>> findByStatus(@PathVariable Status status) {
         List<Country> countries = countryService.findByStatus(status);
@@ -119,12 +124,25 @@ public class CountryController {
         return new ResponseEntity<>(savedCountry, HttpStatus.OK);
     }
 
+    /**
+     * Deletes the country by the given country id.
+     *
+     * @param id The id of the country.
+     * @return the Response Entity with NO CONTENT response.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCountry(@PathVariable Long id) {
         countryService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    /**
+     * Updates the existing country record by using the given details.
+     *
+     * @param id      the id of the country to be updated.
+     * @param country the country  object which contains the update details
+     * @return the Response Entity with update country details.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<Country> update(@PathVariable Long id, @Valid @RequestBody Country country) {
         Country updatedCountry = countryService.update(id, country);

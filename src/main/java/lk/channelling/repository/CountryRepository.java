@@ -38,10 +38,29 @@ import java.util.Optional;
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
 
+    /**
+     * Returns the Country by its code.
+     *
+     * @param code the code of the country.
+     * @return the country details.
+     */
     Optional<Country> findByCode(String code);
+
+    /**
+     * Returns the country by its id.
+     *
+     * @param id must not be {@literal null}. The id of the country.
+     * @return the country details.
+     */
 
     Optional<Country> findById(Long id);
 
+    /**
+     * Returns the list of countries by the status.
+     *
+     * @param status the status of the country. It should either ACTIVE or INACTIVE.
+     * @return the list of countries.
+     */
     List<Country> findByStatus(Status status);
 
 

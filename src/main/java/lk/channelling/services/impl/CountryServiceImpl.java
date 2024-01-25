@@ -52,7 +52,7 @@ public class CountryServiceImpl implements CountryService {
     public Country findById(Long id) {
         Optional<Country> country = countryRepository.findById(id);
 
-        if (!country.isPresent()) throw new RecordNotFoundException("No country record found for the id : " + id);
+        if (country.isEmpty()) throw new RecordNotFoundException("No country record found for the id : " + id);
 
         return country.get();
     }
@@ -61,7 +61,7 @@ public class CountryServiceImpl implements CountryService {
     public Country findByCode(String code) {
         Optional<Country> country = countryRepository.findByCode(code);
 
-        if (!country.isPresent()) throw new RecordNotFoundException("No country record found for the code : " + code);
+        if (country.isEmpty()) throw new RecordNotFoundException("No country record found for the code : " + code);
 
         return country.get();
     }
