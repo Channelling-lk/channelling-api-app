@@ -121,7 +121,7 @@ public class CountryController {
     @PostMapping("/save")
     public ResponseEntity<Country> save(@Valid @RequestBody Country country) {
         Country savedCountry = countryService.save(country);
-        return new ResponseEntity<>(savedCountry, HttpStatus.OK);
+        return new ResponseEntity<>(savedCountry, HttpStatus.CREATED);
     }
 
     /**

@@ -4,7 +4,7 @@ databaseChangeLog:
       author: ChinthakaMa
       changes:
         - createTable:
-            tableName: country
+            tableName: institution
             columns:
               - column:
                   name: id
@@ -13,26 +13,24 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    primaryKeyName: pk_country
+                    primaryKeyName: pk_institution
               - column:
                   name: code
                   type: varchar(10)
                   constraints:
                     nullable: false
                     unique: true
-                    uniqueConstraintName: uk_code
               - column:
                   name: description
                   type: varchar(100)
                   constraints:
                     nullable: false
               - column:
-                  name: iso_code
-                  type: varchar(10)
-              - column:
                   name: status
                   type: varchar(15)
                   defaultValue: ACTIVE
+                  constraints:
+                    nullable: false
               - column:
                   name: created_user
                   type: varchar(255)
@@ -53,3 +51,11 @@ databaseChangeLog:
               - column:
                   name: version
                   type: int
+              - column:
+                  name: country_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_institution_country
+                    referencedTableName: country
+                    referencedColumnNames: id

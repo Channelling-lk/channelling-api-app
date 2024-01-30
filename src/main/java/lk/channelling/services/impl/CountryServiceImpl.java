@@ -18,6 +18,7 @@ package lk.channelling.services.impl;
 import lk.channelling.entity.Country;
 import lk.channelling.enums.Status;
 import lk.channelling.exception.ObjectNotUniqueException;
+import lk.channelling.exception.OldObjectException;
 import lk.channelling.exception.RecordNotFoundException;
 import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.CountryRepository;
@@ -75,27 +76,24 @@ public class CountryServiceImpl implements CountryService {
     public Country save(Country country) {
         LoginAuthenticationHandler.validateUser();
 
-        country.setCreatedUser(LoginAuthenticationHandler.getUserName());
-        country.setStatus(Status.ACTIVE);
-        country.setCreatedDate(TimeUtil.getCurrentTimeStamp());
-
         Optional<Country> fetchedCountry = countryRepository.findByCode(country.getCode());
 
         if (fetchedCountry.isPresent())
             throw new ObjectNotUniqueException("The entered country already exists in the database.");
 
+        country.setStatus(Status.ACTIVE);
+        country.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        country.setCreatedDate(TimeUtil.getCurrentTimeStamp());
+
         return countryRepository.saveAndFlush(country);
     }
-
 
     @Override
     public void delete(Long id) {
         Country fetchedCountry = findById(id);
-
         if (fetchedCountry == null) throw new RecordNotFoundException("No country record found for the id : " + id);
 
         countryRepository.delete(fetchedCountry);
-
     }
 
     @Override
@@ -103,7 +101,11 @@ public class CountryServiceImpl implements CountryService {
         LoginAuthenticationHandler.validateUser();
 
         Optional<Country> updatedCountry = countryRepository.findById(id).map(country -> {
+            if (country.getVersion() != newCountry.getVersion()) throw new OldObjectException();
+
             country.setDescription(newCountry.getDescription());
+            country.setIsoCode(newCountry.getIsoCode());
+            country.setStatus(newCountry.getStatus());
             country.setModifiedUser(LoginAuthenticationHandler.getUserName());
             country.setModifiedDate(TimeUtil.getCurrentTimeStamp());
 

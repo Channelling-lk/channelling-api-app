@@ -15,7 +15,6 @@
  */
 package lk.channelling.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -30,7 +29,6 @@ public abstract class BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
-    @JsonIgnore
     protected Long id;
 
     @Enumerated(EnumType.STRING)
@@ -55,7 +53,6 @@ public abstract class BaseEntity {
     @Column(name = "modified_date")
     private Timestamp modifiedDate;
 
-    @JsonIgnore
     @Version
     private Long version;
 }

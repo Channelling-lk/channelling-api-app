@@ -13,32 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package lk.channelling.entity;
-
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.Data;
-
-import java.io.Serializable;
+package lk.channelling.exception;
 
 /**
- * Represents a Contact Method with its details.
- *
- * <p>This entity class hold information such as the Contact Method code, name, and other relevant details.
- * It is designed to be used in conjunction to persist and retrieve Contact Method information.</p>
+ * Exception thrown when an attempt is made to create or save an object that is too old.
  *
  * @author Chinthaka Manathunga
  * @version 1.0
  * @since 1.0
  */
+public class OldObjectException extends RuntimeException {
 
-@JsonSerialize
-@Entity
-@Data
-@Table(name = "contact_method")
-public class ContactMethod extends DefinitionBaseEntity implements Serializable {
+    /**
+     * Constructs an {@code OldObjectException}
+     */
+    public OldObjectException() {
+        super();
+    }
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * Constructs an {@code OldObjectException} with the specified detail message.
+     *
+     * @param message the detail message.
+     */
+    public OldObjectException(String message) {
+        super(message);
+    }
+
 }

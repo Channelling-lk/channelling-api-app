@@ -121,7 +121,7 @@ public class ContactMethodController {
     @PostMapping("/save")
     public ResponseEntity<ContactMethod> save(@Valid @RequestBody ContactMethod ContactMethod) {
         ContactMethod savedContactMethod = contactMethodService.save(ContactMethod);
-        return new ResponseEntity<>(savedContactMethod, HttpStatus.OK);
+        return new ResponseEntity<>(savedContactMethod, HttpStatus.CREATED);
     }
 
     /**

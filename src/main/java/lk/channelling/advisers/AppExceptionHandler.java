@@ -1,7 +1,9 @@
 package lk.channelling.advisers;
 
-import lk.channelling.exception.NoContentException;
+import lk.channelling.exception.ObjectNotUniqueException;
+import lk.channelling.exception.OldObjectException;
 import lk.channelling.exception.RecordNotFoundException;
+import lk.channelling.exception.UserNotFoundException;
 import lk.channelling.response.ErrorResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -43,7 +45,28 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         return commonExceptionHandler(ex, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(ObjectNotUniqueException.class)
+    protected ResponseEntity<Object> handleObjectNotUnique(ObjectNotUniqueException ex) {
+        return commonExceptionHandler(ex, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
 
+    @ExceptionHandler(UserNotFoundException.class)
+    protected ResponseEntity<Object> handleUserNotFound(UserNotFoundException ex) {
+        return commonExceptionHandler(ex, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(OldObjectException.class)
+    protected ResponseEntity<Object> handleOldObjectException(OldObjectException ex) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setTimestamp(new Date());
+        errorResponse.setStatus(HttpStatus.UNPROCESSABLE_ENTITY.value());
+
+        List<String> errors = new ArrayList<>();
+        errors.add("The record was modified.");
+
+        errorResponse.setErrors(errors);
+        return new ResponseEntity<>(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
 
     private ResponseEntity<Object> commonExceptionHandler(Exception ex, HttpStatus status) {
         ErrorResponse errorResponse = new ErrorResponse();

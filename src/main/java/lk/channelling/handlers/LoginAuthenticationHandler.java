@@ -62,7 +62,7 @@ public class LoginAuthenticationHandler {
     }
 
     public static void validateUser() {
-        if (userName == null) throw new UserNotFoundException();
+        if (userName == null) throw new UserNotFoundException("Unauthorized.");
     }
 
 }

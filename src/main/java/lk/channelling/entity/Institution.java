@@ -16,39 +16,41 @@
 
 package lk.channelling.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * Represents a Country with its details.
+ * Represents an Institution with its details.
  *
- * <p>This entity class hold information such as the country code, name, its iso code and other relevant details.
- * It is designed to be used in conjunction to persist and retrieve country information.</p>
+ * <p>This entity class hold information such as the institution code, name, and other relevant details.
+ * It is designed to be used in conjunction to persist and retrieve institution information.</p>
  *
  * @author Chinthaka Manathunga
  * @version 1.0
  * @since 1.0
  */
-
 @JsonSerialize
 @Entity
 @Data
-@Table(name = "country")
-public class Country extends DefinitionBaseEntity implements Serializable {
+@Table(name = "institution")
+public class Institution extends DefinitionBaseEntity implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
-    @NotBlank(message = "Error: Iso Code is required")
-    @Size(max = 10, message = "Error: Iso Code must be less than {value} characters.")
-    @JsonProperty("iso_code")
-    @Column(name = "iso_code")
-    private String isoCode;
+    @Valid
+    @NotNull( message = "Error: Country is required.")
+    @Column(name = "country_id", nullable = false)
+    private Long countryId;
 }

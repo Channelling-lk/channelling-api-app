@@ -18,6 +18,7 @@ package lk.channelling.services.impl;
 import lk.channelling.entity.ContactMethod;
 import lk.channelling.enums.Status;
 import lk.channelling.exception.ObjectNotUniqueException;
+import lk.channelling.exception.OldObjectException;
 import lk.channelling.exception.RecordNotFoundException;
 import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.ContactMethodRepository;
@@ -75,19 +76,17 @@ public class ContactMethodServiceImpl implements ContactMethodService {
     @Override
     public ContactMethod save(ContactMethod contactMethod) {
         LoginAuthenticationHandler.validateUser();
-
-        contactMethod.setCreatedUser(LoginAuthenticationHandler.getUserName());
-        contactMethod.setStatus(Status.ACTIVE);
-        contactMethod.setCreatedDate(TimeUtil.getCurrentTimeStamp());
-
         Optional<ContactMethod> fetchedContactMethod = contactMethodRepository.findByCode(contactMethod.getCode());
 
         if (fetchedContactMethod.isPresent())
             throw new ObjectNotUniqueException("The entered contact method already exists in the database.");
 
+        contactMethod.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        contactMethod.setStatus(Status.ACTIVE);
+        contactMethod.setCreatedDate(TimeUtil.getCurrentTimeStamp());
+
         return contactMethodRepository.saveAndFlush(contactMethod);
     }
-
 
     @Override
     public void delete(Long id) {
@@ -97,19 +96,22 @@ public class ContactMethodServiceImpl implements ContactMethodService {
             throw new RecordNotFoundException("No contact method record found for the id : " + id);
 
         contactMethodRepository.delete(fetchedContactMethod);
-
     }
 
     @Override
     public ContactMethod update(Long id, ContactMethod newContactMethod) {
         LoginAuthenticationHandler.validateUser();
 
-        Optional<ContactMethod> updatedContactMethod = contactMethodRepository.findById(id).map(country -> {
-            country.setDescription(newContactMethod.getDescription());
-            country.setModifiedUser(LoginAuthenticationHandler.getUserName());
-            country.setModifiedDate(TimeUtil.getCurrentTimeStamp());
+        Optional<ContactMethod> updatedContactMethod = contactMethodRepository.findById(id).map(cm -> {
+            if (cm.getVersion() != newContactMethod.getVersion())
+                throw new OldObjectException();
 
-            return contactMethodRepository.save(country);
+            cm.setDescription(newContactMethod.getDescription());
+            cm.setStatus(newContactMethod.getStatus());
+            cm.setModifiedUser(LoginAuthenticationHandler.getUserName());
+            cm.setModifiedDate(TimeUtil.getCurrentTimeStamp());
+
+            return contactMethodRepository.save(cm);
         });
 
         if (updatedContactMethod.isPresent()) return updatedContactMethod.get();
