@@ -53,7 +53,7 @@ public class SpecializationServiceImpl implements SpecializationService {
     public Specialization findById(Long id) {
         Optional<Specialization> country = specializationRepository.findById(id);
 
-        if (country.isEmpty()) throw new RecordNotFoundException("No contact method record found for the id : " + id);
+        if (country.isEmpty()) throw new RecordNotFoundException("No Specialization record found for the id : " + id);
 
         return country.get();
     }
@@ -63,7 +63,7 @@ public class SpecializationServiceImpl implements SpecializationService {
         Optional<Specialization> country = specializationRepository.findByCode(code);
 
         if (country.isEmpty())
-            throw new RecordNotFoundException("No contact method record found for the code : " + code);
+            throw new RecordNotFoundException("No Specialization record found for the code : " + code);
 
         return country.get();
     }
@@ -79,7 +79,7 @@ public class SpecializationServiceImpl implements SpecializationService {
         Optional<Specialization> fetchedSpecialization = specializationRepository.findByCode(specialization.getCode());
 
         if (fetchedSpecialization.isPresent())
-            throw new ObjectNotUniqueException("The entered contact method already exists in the database.");
+            throw new ObjectNotUniqueException("The entered Specialization already exists in the database.");
 
         specialization.setCreatedUser(LoginAuthenticationHandler.getUserName());
         specialization.setStatus(Status.ACTIVE);
@@ -93,7 +93,7 @@ public class SpecializationServiceImpl implements SpecializationService {
         Specialization fetchedSpecialization = findById(id);
 
         if (fetchedSpecialization == null)
-            throw new RecordNotFoundException("No contact method record found for the id : " + id);
+            throw new RecordNotFoundException("No Specialization record found for the id : " + id);
 
         specializationRepository.delete(fetchedSpecialization);
     }
@@ -115,6 +115,6 @@ public class SpecializationServiceImpl implements SpecializationService {
         });
 
         if (updatedSpecialization.isPresent()) return updatedSpecialization.get();
-        throw new RecordNotFoundException("No contact method record found for the id : " + id);
+        throw new RecordNotFoundException("No Specialization record found for the id : " + id);
     }
 }

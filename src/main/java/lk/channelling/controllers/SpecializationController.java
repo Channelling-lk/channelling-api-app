@@ -39,7 +39,7 @@ import java.util.List;
  * @since 1.0
  */
 @RestController
-@RequestMapping("/api/v1/contact-method")
+@RequestMapping("/api/v1/specialization")
 @CrossOrigin(origins = "*")
 @Log4j2
 public class SpecializationController {
