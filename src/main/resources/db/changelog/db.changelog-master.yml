@@ -5,4 +5,12 @@ databaseChangeLog:
       file: classpath:/db/changelog/002_contact_method.yml
   - include:
       file: classpath:/db/changelog/003_institution.yml
+  - include:
+      file: classpath:/db/changelog/004_specialization.yml
+  - include:
+      file: classpath:/db/changelog/005_qualification_level.yml
+  - include:
+      file: classpath:/db/changelog/006_qualification.yml
+  - include:
+      file: classpath:/db/changelog/007_transaction_type.yml
   # Add more include statements for additional changelog files if needed
