@@ -39,7 +39,7 @@ import java.util.List;
  * @since 1.0
  */
 @RestController
-@RequestMapping("/api/v1/qualification-level")
+@RequestMapping("/api/v1/transaction-type")
 @CrossOrigin(origins = "*")
 @Log4j2
 public class TransactionTypeController {

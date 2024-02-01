@@ -13,4 +13,5 @@ databaseChangeLog:
       file: classpath:/db/changelog/006_qualification.yml
   - include:
       file: classpath:/db/changelog/007_transaction_type.yml
-  # Add more include statements for additional changelog files if needed
+  - include:
+      file: classpath:/db/changelog/008_title.yml
