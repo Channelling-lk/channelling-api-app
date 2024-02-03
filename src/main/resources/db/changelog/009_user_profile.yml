@@ -1,0 +1,91 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ChinthakaMa
+      changes:
+        - createTable:
+            tableName: user_profile
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_user_profile
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uk_first_name
+              - column:
+                  name: last_name
+                  type: varchar(255)
+              - column:
+                  name: display_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: identification_method
+                  type: varchar2(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: identification_value
+                  type: varchar2(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uk_identification
+              - column:
+                  name: mobile_no
+                  type: varchar(30)
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: address_line_1
+                  type: varchar(100)
+              - column:
+                  name: address_line_2
+                  type: varchar(100)
+              - column:
+                  name: address_line_3
+                  type: varchar(100)
+              - column:
+                  name: date_of_birth
+                  type: datetime
+              - column:
+                  name: gender
+                  type: varchar(20)
+              - column:
+                  name: profile_picture
+                  type: clob
+              - column:
+                  name: status
+                  type: varchar(15)
+                  defaultValue: ACTIVE
+              - column:
+                  name: created_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: datetime
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_user
+                  type: varchar(255)
+              - column:
+                  name: modified_date
+                  type: timestamp
+              - column:
+                  name: version
+                  type: int
