@@ -58,15 +58,6 @@ public class UserProfileServiceImpl implements UserProfileService {
         return userProfile.get();
     }
 
-    @Override
-    public UserProfile findByCode(String code) {
-        Optional<UserProfile> userProfile = userProfileRepository.findByCode(code);
-
-        if (userProfile.isEmpty())
-            throw new RecordNotFoundException("No userProfile record found for the code : " + code);
-
-        return userProfile.get();
-    }
 
     @Override
     public List<UserProfile> findByStatus(Status status) {

@@ -85,17 +85,6 @@ public class UserProfileController {
         return new ResponseEntity<>(userProfile, HttpStatus.OK);
     }
 
-    /**
-     * Returns the userProfile by its code.
-     *
-     * @param code The code of the userProfile.
-     * @return The Response Entity with userProfile object.
-     */
-    @GetMapping("/code={code}")
-    public ResponseEntity<UserProfile> findByCode(@PathVariable String code) {
-        UserProfile userProfile = userProfileService.findByCode(code);
-        return new ResponseEntity<>(userProfile, HttpStatus.OK);
-    }
 
     /**
      * Returns the list of userProfile by the given status.

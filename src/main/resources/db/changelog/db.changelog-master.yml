@@ -17,3 +17,9 @@ databaseChangeLog:
       file: classpath:/db/changelog/008_title.yml
   - include:
       file: classpath:/db/changelog/009_user_profile.yml
+  - include:
+      file: classpath:/db/changelog/010_role.yml
+  - include:
+      file: classpath:/db/changelog/011_user.yml
+  - include:
+      file: classpath:/db/changelog/012_user_role.yml

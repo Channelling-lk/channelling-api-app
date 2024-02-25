@@ -39,14 +39,6 @@ import java.util.Optional;
 public interface UserProfileRepository extends JpaRepository<UserProfile, Long> {
 
     /**
-     * Returns the UserProfile by its code.
-     *
-     * @param code the code of the country.
-     * @return the country details.
-     */
-    Optional<UserProfile> findByCode(String code);
-
-    /**
      * Returns the country by its id.
      *
      * @param id must not be {@literal null}. The id of the country.

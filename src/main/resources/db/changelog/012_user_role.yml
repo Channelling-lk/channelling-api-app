@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ChinthakaMa
+      changes:
+        - createTable:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_user_role
+              - column:
+                  name: role_id
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_user_role

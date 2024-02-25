@@ -50,13 +50,6 @@ public interface UserProfileService {
      */
     UserProfile findById(Long id);
 
-    /**
-     * Returns the userProfile by its code.
-     *
-     * @param code the code of the userProfile.
-     * @return the UserProfile
-     */
-    UserProfile findByCode(String code);
 
     /**
      * Returns the list of countries by its status.
