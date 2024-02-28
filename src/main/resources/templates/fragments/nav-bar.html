@@ -1,0 +1,42 @@
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div class="ui secondary  menu">
+    <a class="item">
+        Home
+    </a>
+    <a class="item">
+        Messages
+    </a>
+    <a class="item active">
+        Friends
+    </a>
+    <div class="right menu">
+        <div class="item">
+            <div class="ui icon input">
+                <input placeholder="Search..." type="text">
+                <i class="search link icon"></i>
+            </div>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            <div class="ui dropdown item">
+                <i class="user icon"></i>
+                <div sec:authentication="name"></div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a class="item">English</a>
+                    <a class="item">Russian</a>
+                    <a class="item">Spanish</a>
+                </div>
+            </div>
+        </div>
+
+        <div sec:authorize="isAnonymous()">
+            <div class="item">
+                <a class="ui primary button" th:href="@{/login}">
+                    <i class="sign in icon"></i>Sign In</a>
+            </div>
+        </div>
+    </div>
+</div>

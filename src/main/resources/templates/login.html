@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+
+
+    <title th:text="${title}"></title>
+    <link href="webjars/fomantic-ui/dist/semantic.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/site.css}">
+    <script th:src="@{/javascript/library/jquery.min.js}"></script>
+</head>
+
+<body>
+
+<div class="ui grid">
+    <div class="two column row">
+        <div class="column tablet computer large screen only">
+            <img alt="" class="ui fluid image" th:src="@{/assets/images/background-img.png}">
+        </div>
+
+        <div class="column">
+            <div class="row" style="margin: 10% 0; padding: 0 15%">
+                <div class="middle aligned three column centered grid ">
+
+                    <h1 class="ui center aligned icon header">
+                        <i class="unlock alternate icon"></i>
+                        Welcome
+                        <div class="sub header">
+                            Securely Access Your Account
+                        </div>
+                    </h1>
+
+                    <br>
+
+                    <div th:if="${param.error}">
+                        <div class="ui error message">
+                            <div class="header">
+                                Login Failed !
+                            </div>
+                            <p>The username or password is incorrect. </p>
+                        </div>
+                        <br>
+                    </div>
+
+                    <form class="ui form" id="loginForm" method="post" th:action="@{/login}">
+                        <div class="field">
+                            <label>Member ID / Email / NIC</label>
+                            <input id="username" name="username" placeholder="Enter your Member ID / Email / NIC"
+                                   type="text">
+                        </div>
+
+                        <div class="field">
+                            <label>Password</label>
+                            <input name="password" placeholder="Password" type="password">
+                        </div>
+
+                        <div class="ui right floated buttons">
+                            <button class="ui positive button" type="submit">Login</button>
+                            <div class="or"></div>
+                            <button class="ui  button" type="button"> Register</button>
+                        </div>
+
+                    </form>
+
+                    <br><br>
+                    <button class="fluid ui teal button">Forgot Password</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+
+    // $(document).ready(function () {
+    //     $("#loginForm").submit(function () {
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "/login",
+    //             data: {
+    //                 userName: $("#txtUserName").val(),
+    //                 password: $("#txtPassword").val()
+    //             },
+    //             success: function (data) {
+    //                 console.log('success');
+    //             }
+    //         });
+    //
+    //         return false;
+    //     });
+    // });
+</script>
