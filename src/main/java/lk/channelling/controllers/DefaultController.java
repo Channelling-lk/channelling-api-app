@@ -37,5 +37,11 @@ public class DefaultController {
         return new ModelAndView("login");
     }
 
+    @GetMapping("/channelling")
+    public ModelAndView channelling(Model model) {
+        model.addAttribute("title", "Channel Your Doctor");
+        return new ModelAndView("channelling");
+    }
+
 
 }

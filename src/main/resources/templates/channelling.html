@@ -1,0 +1,73 @@
+<!--Header files-->
+<div th:insert="~{header}"></div>
+
+<body>
+<!--Sidebar container-->
+<div th:insert="~{side-bar}"></div>
+
+<div class="pusher">
+    <div th:insert="~{nav-bar}" th:remove="tag"></div>
+
+    <div class="ui divider"></div>
+
+    <!--Page Content-->
+    <div class="ui breadcrumb" style="padding: 15px 15px;">
+        <a class="section">Home</a>
+        <i class="right chevron icon divider"></i>
+        <a class="section">Channelling</a>
+        <i class="right arrow icon divider"></i>
+        <div class="active section">Search Doctors</div>
+    </div>
+
+    <div class="ui form">
+        <div class="fields">
+            <div class="four wide field">
+                <label>Doctor's Name</label>
+                <input placeholder="Doctor's Name" type="text">
+            </div>
+
+            <div class="three wide field">
+                <label>Specialization</label>
+                <select class="ui fluid dropdown">
+                    <option value="">State</option>
+                    <option value="AL">Alabama</option>
+                </select>
+            </div>
+
+            <div class="four wide field">
+                <label>Hospital</label>
+                <select class="ui fluid dropdown">
+                    <option value="">Hospital</option>
+                    <option value="AL">Alabama</option>
+                </select>
+            </div>
+
+            <div class="two wide field">
+                <label>Date</label>
+                <div class="ui calendar" id="standard_calendar">
+                    <div class="ui fluid input left icon">
+                        <i class="calendar icon"></i>
+                        <input placeholder="Date/Time" type="text">
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label></label>
+                <div class="ui buttons">
+                    <button class="ui button">Cancel</button>
+                    <div class="or"></div>
+                    <button class="ui positive button">Save</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--End of Page Content-->
+
+<div th:insert="~{footer}"></div>
+
+</div>
+</body>
+</html>
