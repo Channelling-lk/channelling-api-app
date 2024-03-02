@@ -18,6 +18,7 @@ package lk.channelling.controllers;
 import jakarta.validation.Valid;
 import lk.channelling.entity.Specialization;
 import lk.channelling.enums.Status;
+import lk.channelling.response.ApiResponse;
 import lk.channelling.services.SpecializationService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,12 +66,12 @@ public class SpecializationController {
      * @return The details of all countries as a Response Entity.
      */
     @GetMapping("/all")
-    public ResponseEntity<List<Specialization>> findAll() {
-        List<Specialization> countries = specializationService.findAll();
+    public ResponseEntity<ApiResponse> findAll() {
+        ApiResponse specializations = specializationService.findAll();
 
-        if (countries.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (specializations == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
-        return new ResponseEntity<>(countries, HttpStatus.OK);
+        return new ResponseEntity<>(specializations, HttpStatus.OK);
     }
 
     /**
@@ -81,8 +82,8 @@ public class SpecializationController {
      */
     @GetMapping("/id={id}")
     public ResponseEntity<Specialization> findById(@PathVariable Long id) {
-        Specialization Specialization = specializationService.findById(id);
-        return new ResponseEntity<>(Specialization, HttpStatus.OK);
+        Specialization specialization = specializationService.findById(id);
+        return new ResponseEntity<>(specialization, HttpStatus.OK);
     }
 
     /**
@@ -93,8 +94,8 @@ public class SpecializationController {
      */
     @GetMapping("/code={code}")
     public ResponseEntity<Specialization> findByCode(@PathVariable String code) {
-        Specialization Specialization = specializationService.findByCode(code);
-        return new ResponseEntity<>(Specialization, HttpStatus.OK);
+        Specialization specialization = specializationService.findByCode(code);
+        return new ResponseEntity<>(specialization, HttpStatus.OK);
     }
 
     /**
@@ -115,12 +116,12 @@ public class SpecializationController {
     /**
      * Endpoint to save a new Specialization.
      *
-     * @param Specialization The Specialization object representing the Specialization data to be saved.
+     * @param specialization The Specialization object representing the Specialization data to be saved.
      * @return ResponseEntity with the saved Specialization and HTTP status.
      */
     @PostMapping("/save")
-    public ResponseEntity<Specialization> save(@Valid @RequestBody Specialization Specialization) {
-        Specialization savedSpecialization = specializationService.save(Specialization);
+    public ResponseEntity<Specialization> save(@Valid @RequestBody Specialization specialization) {
+        Specialization savedSpecialization = specializationService.save(specialization);
         return new ResponseEntity<>(savedSpecialization, HttpStatus.CREATED);
     }
 
@@ -140,12 +141,12 @@ public class SpecializationController {
      * Updates the existing Specialization record by using the given details.
      *
      * @param id             the id of the Specialization to be updated.
-     * @param Specialization the Specialization  object which contains the update details
+     * @param specialization the Specialization  object which contains the update details
      * @return the Response Entity with update Specialization details.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<Specialization> update(@PathVariable Long id, @Valid @RequestBody Specialization Specialization) {
-        Specialization updatedSpecialization = specializationService.update(id, Specialization);
+    public ResponseEntity<Specialization> update(@PathVariable Long id, @Valid @RequestBody Specialization specialization) {
+        Specialization updatedSpecialization = specializationService.update(id, specialization);
         return new ResponseEntity<>(updatedSpecialization, HttpStatus.OK);
     }
 }

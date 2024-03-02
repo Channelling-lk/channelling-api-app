@@ -19,7 +19,7 @@
         <div class="active section">Search Doctors</div>
     </div>
 
-    <div class="ui form">
+    <div class="ui segment form">
         <div class="fields">
             <div class="four wide field">
                 <label>Doctor's Name</label>
@@ -28,7 +28,7 @@
 
             <div class="three wide field">
                 <label>Specialization</label>
-                <select class="ui fluid dropdown">
+                <select class="ui fluid dropdown" name="ddlSpecialization">
                     <option value="">State</option>
                     <option value="AL">Alabama</option>
                 </select>
@@ -37,6 +37,8 @@
             <div class="four wide field">
                 <label>Hospital</label>
                 <select class="ui fluid dropdown">
+
+
                     <option value="">Hospital</option>
                     <option value="AL">Alabama</option>
                 </select>
@@ -53,11 +55,11 @@
             </div>
 
             <div class="field">
-                <label></label>
+                <label>&nbsp;</label>
                 <div class="ui buttons">
-                    <button class="ui button">Cancel</button>
+                    <button class="ui positive button">Search</button>
                     <div class="or"></div>
-                    <button class="ui positive button">Save</button>
+                    <button class="ui button">Reset</button>
                 </div>
 
             </div>
@@ -70,4 +72,15 @@
 
 </div>
 </body>
+
+<script>
+
+    $('#ddlSpecialization')
+        .dropdown({
+                apiSettings: {url: 'http://localhost:8080/api/v1/specialization/all'},
+                filterRemoteData: true
+            }
+        );
+</script>
+
 </html>

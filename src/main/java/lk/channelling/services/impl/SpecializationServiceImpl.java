@@ -22,6 +22,8 @@ import lk.channelling.exception.OldObjectException;
 import lk.channelling.exception.RecordNotFoundException;
 import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.SpecializationRepository;
+import lk.channelling.response.ApiResponse;
+import lk.channelling.response.ApiResponseItem;
 import lk.channelling.services.SpecializationService;
 import lk.channelling.util.TimeUtil;
 import lombok.extern.log4j.Log4j2;
@@ -45,8 +47,10 @@ public class SpecializationServiceImpl implements SpecializationService {
     }
 
     @Override
-    public List<Specialization> findAll() {
-        return specializationRepository.findAll();
+    public ApiResponse findAll() {
+        return new ApiResponse(true, specializationRepository.findAll().stream()
+                .map(specialization -> new ApiResponseItem(specialization.getDescription(), specialization.getCode(), specialization.getDescription()))
+                .toList());
     }
 
     @Override
