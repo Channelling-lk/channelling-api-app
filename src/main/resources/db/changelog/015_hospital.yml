@@ -1,0 +1,76 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ChinthakaMa
+      changes:
+        - createTable:
+            tableName: hospital
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_hospital
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: display_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: br_no
+                  type: varchar(50)
+              - column:
+                  name: address_line1
+                  type: varchar(255)
+              - column:
+                  name: address_line2
+                  type: varchar(255)
+              - column:
+                  name: address_line3
+                  type: varchar(255)
+              - column:
+                  name: city_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_hospital_city
+                    referencedTableName: city
+                    referencedColumnNames: id
+              - column:
+                  name: hospital_fee
+                  type: decimal(16,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(15)
+                  defaultValue: ACTIVE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: datetime
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_user
+                  type: varchar(255)
+              - column:
+                  name: modified_date
+                  type: timestamp
+              - column:
+                  name: version
+                  type: int

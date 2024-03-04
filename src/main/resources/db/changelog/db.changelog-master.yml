@@ -23,3 +23,9 @@ databaseChangeLog:
       file: classpath:/db/changelog/011_user.yml
   - include:
       file: classpath:/db/changelog/012_user_role.yml
+  - include:
+      file: classpath:/db/changelog/013_state.yml
+  - include:
+      file: classpath:/db/changelog/014_city.yml
+  - include:
+      file: classpath:/db/changelog/015_hospital.yml
