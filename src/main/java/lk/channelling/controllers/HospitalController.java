@@ -18,6 +18,7 @@ package lk.channelling.controllers;
 import jakarta.validation.Valid;
 import lk.channelling.entity.Hospital;
 import lk.channelling.enums.Status;
+import lk.channelling.response.ApiResponse;
 import lk.channelling.services.HospitalService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +66,8 @@ public class HospitalController {
      * @return The details of all hospitals as a Response Entity.
      */
     @GetMapping("/all")
-    public ResponseEntity<List<Hospital>> findAll() {
-        List<Hospital> hospitals = hospitalService.findAll();
+    public ResponseEntity<ApiResponse> findAll() {
+        ApiResponse hospitals = hospitalService.findAll();
 
         if (hospitals.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 

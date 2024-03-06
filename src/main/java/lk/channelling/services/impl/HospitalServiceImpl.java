@@ -21,6 +21,8 @@ import lk.channelling.exception.OldObjectException;
 import lk.channelling.exception.RecordNotFoundException;
 import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.HospitalRepository;
+import lk.channelling.response.ApiResponse;
+import lk.channelling.response.ApiResponseItem;
 import lk.channelling.services.HospitalService;
 import lk.channelling.util.TimeUtil;
 import lombok.extern.log4j.Log4j2;
@@ -45,7 +47,9 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public List<Hospital> findAll() {
-        return hospitalRepository.findAll();
+        return new ApiResponse(true, ) hospitalRepository.findAll().stream()
+                .map(hospital -> new ApiResponseItem(String.pa hospital.getId, hospital.getName(), hospital.getDisplayName()))->
+        ;
     }
 
     @Override

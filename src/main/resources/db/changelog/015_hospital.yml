@@ -74,3 +74,14 @@ databaseChangeLog:
               - column:
                   name: version
                   type: int
+
+  - changeSet:
+      id: 2
+      author: ChinthakaMa
+      changes:
+        - addAutoIncrement:
+            columnName: id
+            generationType: ALWAYS
+            tableName: hospital
+            columnDataType: int
+
