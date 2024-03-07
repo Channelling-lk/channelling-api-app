@@ -69,7 +69,7 @@ public class HospitalController {
     public ResponseEntity<ApiResponse> findAll() {
         ApiResponse hospitals = hospitalService.findAll();
 
-        if (hospitals.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        if (hospitals == null) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         return new ResponseEntity<>(hospitals, HttpStatus.OK);
     }

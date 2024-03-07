@@ -29,3 +29,7 @@ databaseChangeLog:
       file: classpath:/db/changelog/014_city.yml
   - include:
       file: classpath:/db/changelog/015_hospital.yml
+  - include:
+      file: classpath:/db/changelog/016_doctor.yml
+  - include:
+      file: classpath:/db/changelog/017_doctor_speciality.yml

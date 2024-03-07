@@ -46,10 +46,10 @@ public class HospitalServiceImpl implements HospitalService {
     }
 
     @Override
-    public List<Hospital> findAll() {
-        return new ApiResponse(true, ) hospitalRepository.findAll().stream()
-                .map(hospital -> new ApiResponseItem(String.pa hospital.getId, hospital.getName(), hospital.getDisplayName()))->
-        ;
+    public ApiResponse findAll() {
+        return new ApiResponse(true, hospitalRepository.findAll().stream()
+                .map(hospital -> new ApiResponseItem(hospital.getName(), Long.toString(hospital.getId()), hospital.getDisplayName()))
+                .toList());
     }
 
     @Override

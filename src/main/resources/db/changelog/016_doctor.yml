@@ -1,0 +1,101 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ChinthakaMa
+      changes:
+        - createTable:
+            tableName: doctor
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_doctor
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: display_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: identification_method
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: identification_value
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: mobile_no1
+                  type: varchar(20)
+              - column:
+                  name: mobile_no2
+                  type: varchar(20)
+              - column:
+                  name: email
+                  type: varchar(100)
+              - column:
+                  name: address_line1
+                  type: varchar(255)
+              - column:
+                  name: address_line2
+                  type: varchar(255)
+              - column:
+                  name: address_line3
+                  type: varchar(255)
+              - column:
+                  name: city_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_doctor_city
+                    referencedTableName: city
+                    referencedColumnNames: id
+              - column:
+                  name: date_of_birth
+                  type: date
+              - column:
+                  name: gender
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(15)
+                  defaultValue: ACTIVE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: datetime
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_user
+                  type: varchar(255)
+              - column:
+                  name: modified_date
+                  type: timestamp
+              - column:
+                  name: version
+                  type: int
