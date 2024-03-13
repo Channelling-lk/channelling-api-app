@@ -99,3 +99,22 @@ databaseChangeLog:
               - column:
                   name: version
                   type: int
+  - changeSet:
+      id: 2
+      author: ChinthakaMa
+      changes:
+        - addColumn:
+            tableName: doctor
+            columns:
+              - column:
+                  name: doc_reg_no
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_doctor_title
+                    referencedTableName: title
+                    referencedColumnNames: id

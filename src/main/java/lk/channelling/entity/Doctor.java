@@ -110,4 +110,14 @@ public class Doctor extends BaseEntity implements Serializable {
     @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @NotBlank(message = "Error. Doctor Registration No is required.")
+    @Size(max = 100, message = "Error: Doctor Registration No must be less than {value} characters.")
+    @Column(name = "doc_reg_no", nullable = false)
+    private String doctorRegistrationNo;
+
+    @Valid
+    @NotNull(message = "Error: Title ID is required.")
+    @Column(name = "title_id", nullable = false)
+    private Long titleId;
 }
