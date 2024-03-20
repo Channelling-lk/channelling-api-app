@@ -77,7 +77,17 @@ public class LogRequest {
     public void log(Level logLevel, String apiName, String className, String methodName, String argument) {
         StringBuilder message = new StringBuilder();
 
-        message.append(requestId).append(SPACE).append(DATE_AND_TIME).append(DateTimeHandler.formatCurrentDateTime()).append(SPACE).append(API).append(apiName).append(SPACE).append(CLASS_NAME).append(className).append(SPACE).append(ENTER_METHOD).append(methodName).append(SPACE).append(ARGS).append(argument);
+        message.append(requestId)
+                .append(SPACE)
+                .append(DATE_AND_TIME).append(DateTimeHandler.formatCurrentDateTime())
+                .append(SPACE)
+                .append(API).append(apiName)
+                .append(SPACE)
+                .append(CLASS_NAME).append(className)
+                .append(SPACE)
+                .append(ENTER_METHOD).append(methodName)
+                .append(SPACE)
+                .append(ARGS).append(argument);
 
         log.log(logLevel, message.toString());
     }

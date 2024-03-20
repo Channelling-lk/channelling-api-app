@@ -18,7 +18,7 @@ package lk.channelling.controllers;
 import jakarta.validation.Valid;
 import lk.channelling.entity.Specialization;
 import lk.channelling.enums.Status;
-import lk.channelling.response.ApiResponse;
+import lk.channelling.resources.ApiResponse;
 import lk.channelling.services.SpecializationService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;

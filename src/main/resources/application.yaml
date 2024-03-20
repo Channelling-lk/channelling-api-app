@@ -5,6 +5,7 @@ spring:
     password: channelling123
     driver-class-name: com.mysql.cj.jdbc.Driver
 
+
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yml
@@ -12,6 +13,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+    show-sql: true
 
   security:
     user:

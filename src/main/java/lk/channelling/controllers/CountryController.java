@@ -18,6 +18,8 @@ package lk.channelling.controllers;
 import jakarta.validation.Valid;
 import lk.channelling.entity.Country;
 import lk.channelling.enums.Status;
+import lk.channelling.resources.PageArray;
+import lk.channelling.resources.PagingRequest;
 import lk.channelling.services.CountryService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,5 +149,10 @@ public class CountryController {
     public ResponseEntity<Country> update(@PathVariable Long id, @Valid @RequestBody Country country) {
         Country updatedCountry = countryService.update(id, country);
         return new ResponseEntity<>(updatedCountry, HttpStatus.OK);
+    }
+
+    @PostMapping("/data")
+    public PageArray getData(@RequestBody PagingRequest pagingRequest) {
+        return countryService.getData(pagingRequest);
     }
 }

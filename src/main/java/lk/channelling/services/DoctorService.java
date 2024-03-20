@@ -17,7 +17,7 @@ package lk.channelling.services;
 
 import lk.channelling.entity.Doctor;
 import lk.channelling.enums.Status;
-import lk.channelling.response.ApiResponse;
+import lk.channelling.resources.ApiResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

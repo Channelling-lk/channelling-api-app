@@ -13,17 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package lk.channelling.response;
+package lk.channelling.resources;
 
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
-public class ApiResponseItem {
-    private String name;
-    private String value;
-    private String text;
+@NoArgsConstructor
+public class ErrorResponse {
+
+    private Date timestamp;
+    private int status;
+    private List<String> errors;
 }

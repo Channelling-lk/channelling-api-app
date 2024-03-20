@@ -75,7 +75,11 @@ public class LoggingHandler {
 
         Object[] methodParams = joinPoint.getArgs();
         LogRequest.getInstance().setRequestId(requestId);
-        LogRequest.getInstance().log(Level.INFO, apiName, joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName(), Arrays.deepToString(methodParams));
+        LogRequest.getInstance().log(Level.INFO,
+                apiName,
+                joinPoint.getSignature().getDeclaringTypeName(),
+                joinPoint.getSignature().getName(),
+                Arrays.deepToString(methodParams));
 
         LoginAuthenticationHandler.getInstance().setUserName(userName);
     }

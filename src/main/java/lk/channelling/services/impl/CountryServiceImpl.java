@@ -22,13 +22,20 @@ import lk.channelling.exception.OldObjectException;
 import lk.channelling.exception.RecordNotFoundException;
 import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.CountryRepository;
+import lk.channelling.resources.PageArray;
+import lk.channelling.resources.PagingRequest;
 import lk.channelling.services.CountryService;
 import lk.channelling.util.TimeUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,6 +45,7 @@ import java.util.Optional;
 public class CountryServiceImpl implements CountryService {
 
     private CountryRepository countryRepository;
+    private static final String RECORD_NOT_FOUND = "No country record found for the %s : %s";
 
     @Autowired
     public void setCountryRepository(CountryRepository countryRepository) {
@@ -53,7 +61,7 @@ public class CountryServiceImpl implements CountryService {
     public Country findById(Long id) {
         Optional<Country> country = countryRepository.findById(id);
 
-        if (country.isEmpty()) throw new RecordNotFoundException("No country record found for the id : " + id);
+        if (country.isEmpty()) throw new RecordNotFoundException(String.format(RECORD_NOT_FOUND, "id", id));
 
         return country.get();
     }
@@ -62,7 +70,7 @@ public class CountryServiceImpl implements CountryService {
     public Country findByCode(String code) {
         Optional<Country> country = countryRepository.findByCode(code);
 
-        if (country.isEmpty()) throw new RecordNotFoundException("No country record found for the code : " + code);
+        if (country.isEmpty()) throw new RecordNotFoundException(String.format(RECORD_NOT_FOUND, "code", code));
 
         return country.get();
     }
@@ -91,7 +99,7 @@ public class CountryServiceImpl implements CountryService {
     @Override
     public void delete(Long id) {
         Country fetchedCountry = findById(id);
-        if (fetchedCountry == null) throw new RecordNotFoundException("No country record found for the id : " + id);
+        if (fetchedCountry == null) throw new RecordNotFoundException(String.format(RECORD_NOT_FOUND, "id", id));
 
         countryRepository.delete(fetchedCountry);
     }
@@ -101,7 +109,7 @@ public class CountryServiceImpl implements CountryService {
         LoginAuthenticationHandler.validateUser();
 
         Optional<Country> updatedCountry = countryRepository.findById(id).map(country -> {
-            if (country.getVersion() != newCountry.getVersion()) throw new OldObjectException();
+            if (country.getVersion().equals(newCountry.getVersion())) throw new OldObjectException();
 
             country.setDescription(newCountry.getDescription());
             country.setIsoCode(newCountry.getIsoCode());
@@ -113,6 +121,37 @@ public class CountryServiceImpl implements CountryService {
         });
 
         if (updatedCountry.isPresent()) return updatedCountry.get();
-        throw new RecordNotFoundException("No country record found for the id : " + id);
+        throw new RecordNotFoundException(String.format(RECORD_NOT_FOUND, "id", id));
     }
+
+    @Override
+    public PageArray getData(PagingRequest pagingRequest) {
+        long total = countryRepository.count();
+
+        Pageable pageable = PageRequest.of(pagingRequest.getStart(), pagingRequest.getLength(), Sort.by("description").ascending());
+        List<Country> filtered = countryRepository.findAll(pageable).stream().toList();
+
+        PageArray pageArray = new PageArray();
+        pageArray.setRecordsFiltered((int) total);
+        pageArray.setRecordsTotal((int) total);
+        pageArray.setDraw(pagingRequest.getDraw());
+        pageArray.setData(filtered.stream().map(this::toStringList).toList());
+
+        return pageArray;
+    }
+
+    private List<String> toStringList(Country country) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return Arrays.asList(country.getCode(),
+                country.getDescription(),
+                country.getIsoCode(),
+                country.getStatus().toString(),
+                sdf.format(country.getCreatedDate()),
+                country.getCreatedUser());
+    }
+
+
 }
+
+

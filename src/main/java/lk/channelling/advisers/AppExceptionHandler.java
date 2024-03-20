@@ -4,7 +4,7 @@ import lk.channelling.exception.ObjectNotUniqueException;
 import lk.channelling.exception.OldObjectException;
 import lk.channelling.exception.RecordNotFoundException;
 import lk.channelling.exception.UserNotFoundException;
-import lk.channelling.response.ErrorResponse;
+import lk.channelling.resources.ErrorResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

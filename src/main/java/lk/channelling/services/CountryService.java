@@ -17,6 +17,8 @@ package lk.channelling.services;
 
 import lk.channelling.entity.Country;
 import lk.channelling.enums.Status;
+import lk.channelling.resources.PageArray;
+import lk.channelling.resources.PagingRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -89,4 +91,6 @@ public interface CountryService {
      * @return the updated country details.
      */
     Country update(Long id, Country country);
+
+    PageArray getData(PagingRequest pagingRequest);
 }
