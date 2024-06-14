@@ -4,7 +4,7 @@ databaseChangeLog:
       author: ChinthakaMa
       changes:
         - createTable:
-            tableName: doctor_sessions
+            tableName: rating_categories
             columns:
               - column:
                   name: id
@@ -13,29 +13,12 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    primaryKeyName: pk_doctor_sessions
+                    primaryKeyName: pk_rating_categories
               - column:
-                  name: doctor_id
-                  type: int
+                  name: category_name
+                  type: varchar(100)
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_doctor_sessions_doctor
-                    referencedColumnNames: id
-                    referencedTableName: doctor
-              - column:
-                  name: hospital_id
-                  type: int
-                  constraints:
-                    nullable: false
-                    foreignKeyName: fk_doctor_sessions_hospital
-                    referencedColumnNames: id
-                    referencedTableName: hospital
-              - column:
-                  name: session_date_time
-                  type: date
-              - column:
-                  name: max_patients
-                  type: int
               - column:
                   name: status
                   type: varchar(15)
@@ -62,15 +45,3 @@ databaseChangeLog:
               - column:
                   name: version
                   type: int
-  - changeSet:
-      id: 2
-      author: ChinthakaMa
-      changes:
-        - addColumn:
-            tableName: doctor_sessions
-            columns:
-              - column:
-                  name: total_fee
-                  type: decimal(16,4)
-
-

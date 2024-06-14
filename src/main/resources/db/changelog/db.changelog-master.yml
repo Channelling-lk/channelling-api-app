@@ -43,3 +43,19 @@ databaseChangeLog:
       file: classpath:/db/changelog/021_doctor_qualification.yml
   - include:
       file: classpath:/db/changelog/022_doctor_sessions.yml
+  - include:
+      file: classpath:/db/changelog/023_appointment.yml
+  - include:
+      file: classpath:/db/changelog/024_doctor_fees.yml
+  - include:
+      file: classpath:/db/changelog/025_hospital_fees.yml
+  - include:
+      file: classpath:/db/changelog/026_fees.yml
+  - include:
+      file: classpath:/db/changelog/027_payments.yml
+  - include:
+      file: classpath:/db/changelog/028_rating_categories.yml
+  - include:
+      file: classpath:/db/changelog/029_doctor_ratings.yml
+  - include:
+      file: classpath:/db/changelog/030_hospital_ratings.yml

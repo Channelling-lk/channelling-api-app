@@ -4,7 +4,7 @@ databaseChangeLog:
       author: ChinthakaMa
       changes:
         - createTable:
-            tableName: doctor_sessions
+            tableName: fees
             columns:
               - column:
                   name: id
@@ -13,29 +13,26 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    primaryKeyName: pk_doctor_sessions
+                    primaryKeyName: pk_fees
               - column:
-                  name: doctor_id
+                  name: session_id
                   type: int
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_doctor_sessions_doctor
+                    foreignKeyName: fk_fees_doctor_session
                     referencedColumnNames: id
-                    referencedTableName: doctor
+                    referencedTableName: doctor_sessions
               - column:
-                  name: hospital_id
+                  name: transaction_type_id
                   type: int
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_doctor_sessions_hospital
+                    foreignKeyName: fk_fees_transaction_type
                     referencedColumnNames: id
-                    referencedTableName: hospital
+                    referencedTableName: transaction_type
               - column:
-                  name: session_date_time
-                  type: date
-              - column:
-                  name: max_patients
-                  type: int
+                  name: amount
+                  type: decimal(16,4)
               - column:
                   name: status
                   type: varchar(15)
@@ -62,15 +59,3 @@ databaseChangeLog:
               - column:
                   name: version
                   type: int
-  - changeSet:
-      id: 2
-      author: ChinthakaMa
-      changes:
-        - addColumn:
-            tableName: doctor_sessions
-            columns:
-              - column:
-                  name: total_fee
-                  type: decimal(16,4)
-
-

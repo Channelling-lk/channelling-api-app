@@ -4,7 +4,7 @@ databaseChangeLog:
       author: ChinthakaMa
       changes:
         - createTable:
-            tableName: doctor_sessions
+            tableName: doctor_fees
             columns:
               - column:
                   name: id
@@ -13,29 +13,29 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    primaryKeyName: pk_doctor_sessions
+                    primaryKeyName: pk_doctor_fees
               - column:
-                  name: doctor_id
+                  name: amount
+                  type: decimal(16,4)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transaction_id
                   type: int
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_doctor_sessions_doctor
+                    foreignKeyName: fk_doctor_fees_transaction_type
                     referencedColumnNames: id
-                    referencedTableName: doctor
+                    referencedTableName: transaction_type
               - column:
-                  name: hospital_id
-                  type: int
+                  name: effective_from
+                  type: datetime
+                  defaultValueComputed: CURRENT_TIMESTAMP
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_doctor_sessions_hospital
-                    referencedColumnNames: id
-                    referencedTableName: hospital
               - column:
-                  name: session_date_time
-                  type: date
-              - column:
-                  name: max_patients
-                  type: int
+                  name: effective_to
+                  type: datetime
               - column:
                   name: status
                   type: varchar(15)
@@ -67,10 +67,13 @@ databaseChangeLog:
       author: ChinthakaMa
       changes:
         - addColumn:
-            tableName: doctor_sessions
+            tableName: doctor_fees
             columns:
               - column:
-                  name: total_fee
-                  type: decimal(16,4)
-
-
+                  name: doctor_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_doctor_fees_doctor
+                    referencedColumnNames: id
+                    referencedTableName: doctor

@@ -4,7 +4,7 @@ databaseChangeLog:
       author: ChinthakaMa
       changes:
         - createTable:
-            tableName: doctor_sessions
+            tableName: doctor_ratings
             columns:
               - column:
                   name: id
@@ -13,29 +13,53 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    primaryKeyName: pk_doctor_sessions
+                    primaryKeyName: pk_doctor_ratings
+              - column:
+                  name: patient_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_doctor_ratings_patient
+                    referencedColumnNames: id
+                    referencedTableName: patient
+              - column:
+                  name: session_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_doctor_ratings_session
+                    referencedColumnNames: id
+                    referencedTableName: doctor_sessions
               - column:
                   name: doctor_id
                   type: int
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_doctor_sessions_doctor
+                    foreignKeyName: fk_doctor_ratings_doctor
                     referencedColumnNames: id
                     referencedTableName: doctor
               - column:
-                  name: hospital_id
+                  name: category_id
                   type: int
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_doctor_sessions_hospital
+                    foreignKeyName: fk_doctor_ratings_rating_categories
                     referencedColumnNames: id
-                    referencedTableName: hospital
+                    referencedTableName: rating_categories
               - column:
-                  name: session_date_time
-                  type: date
-              - column:
-                  name: max_patients
+                  name: rating
                   type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: comment
+                  type: TEXT
+              - column:
+                  name: rating_date
+                  type: datetime
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
               - column:
                   name: status
                   type: varchar(15)
@@ -62,15 +86,3 @@ databaseChangeLog:
               - column:
                   name: version
                   type: int
-  - changeSet:
-      id: 2
-      author: ChinthakaMa
-      changes:
-        - addColumn:
-            tableName: doctor_sessions
-            columns:
-              - column:
-                  name: total_fee
-                  type: decimal(16,4)
-
-
