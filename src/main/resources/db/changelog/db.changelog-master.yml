@@ -33,3 +33,13 @@ databaseChangeLog:
       file: classpath:/db/changelog/016_doctor.yml
   - include:
       file: classpath:/db/changelog/017_doctor_speciality.yml
+  - include:
+      file: classpath:/db/changelog/018_patient.yml
+  - include:
+      file: classpath:/db/changelog/019_research_details.yml
+  - include:
+      file: classpath:/db/changelog/020_research_header.yml
+  - include:
+      file: classpath:/db/changelog/021_doctor_qualification.yml
+  - include:
+      file: classpath:/db/changelog/022_doctor_sessions.yml
