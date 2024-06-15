@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/channelling_db
-    username: channelling
-    password: channelling123
+    url: jdbc:mysql://${ENV_IP}:${ENV_PORT}/${DB}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 
@@ -18,7 +18,7 @@ spring:
   security:
     user:
       name: user
-      password: user123
+      password: ${SECURITY_PASSWORD}
     filter:
       order: 10
 

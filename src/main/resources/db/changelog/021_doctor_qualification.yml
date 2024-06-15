@@ -1,0 +1,80 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ChinthakaMa
+      changes:
+        - createTable:
+            tableName: doctor_qualification
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_doctor_qualification
+              - column:
+                  name: start_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_date
+                  type: date
+              - column:
+                  name: remarks
+                  type: varchar(255)
+              - column:
+                  name: grade
+                  type: varchar(50)
+              - column:
+                  name: doctor_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_doctor_qualification_doctor
+                    referencedTableName: doctor
+                    referencedColumnNames: id
+              - column:
+                  name: institution_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_doctor_qualification_institution
+                    referencedTableName: institution
+                    referencedColumnNames: id
+              - column:
+                  name: qualification_level_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_doctor_qualification_ql
+                    referencedTableName: qualification_level
+                    referencedColumnNames: id
+              - column:
+                  name: status
+                  type: varchar(15)
+                  defaultValue: ACTIVE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: datetime
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_user
+                  type: varchar(255)
+              - column:
+                  name: modified_date
+                  type: timestamp
+              - column:
+                  name: version
+                  type: int

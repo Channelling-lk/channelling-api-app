@@ -1,0 +1,69 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: ChinthakaMa
+      changes:
+        - createTable:
+            tableName: research_header
+            columns:
+              - column:
+                  name: doctor_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    referencedTableName: doctor
+                    referencedColumnNames: id
+                    foreignKeyName: sddsfs
+                    deleteCascade: true
+              - column:
+                  name: research_id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_research_research_detail
+                    referencedColumnNames: id
+                    deleteCascade: true
+                    foreignKeyName: iuo
+              - column:
+                  name: status
+                  type: varchar(15)
+                  defaultValue: ACTIVE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_user
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_date
+                  type: datetime
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modified_user
+                  type: varchar(255)
+              - column:
+                  name: modified_date
+                  type: timestamp
+              - column:
+                  name: version
+                  type: int
+            foreignKeyConstraints:
+              - foreignKeyConstraint:
+                  baseTableName: research_header
+                  baseColumnNames: doctor_id
+                  referencedTableName: doctor
+                  referencedColumnNames: id
+                  constraintName: fk_drh_doctor_id
+                  onDelete: CASCADE
+              - foreignKeyConstraint:
+                  baseTableName: research_header
+                  baseColumnNames: research_id
+                  referencedTableName: research_details
+                  referencedColumnNames: id
+                  constraintName: fk_drh_research_id
+                  onDelete: CASCADE
