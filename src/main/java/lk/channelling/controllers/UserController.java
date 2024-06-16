@@ -18,8 +18,13 @@ import java.util.Optional;
 @Log4j2
 public class UserController {
 
-    @Autowired
+
     private UserService userService;
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Long id) throws Exception {

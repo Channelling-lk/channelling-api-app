@@ -115,12 +115,12 @@ public class ContactMethodController {
     /**
      * Endpoint to save a new ContactMethod.
      *
-     * @param ContactMethod The ContactMethod object representing the ContactMethod data to be saved.
+     * @param contactMethod The ContactMethod object representing the ContactMethod data to be saved.
      * @return ResponseEntity with the saved ContactMethod and HTTP status.
      */
     @PostMapping("/save")
-    public ResponseEntity<ContactMethod> save(@Valid @RequestBody ContactMethod ContactMethod) {
-        ContactMethod savedContactMethod = contactMethodService.save(ContactMethod);
+    public ResponseEntity<ContactMethod> save(@Valid @RequestBody ContactMethod contactMethod) {
+        ContactMethod savedContactMethod = contactMethodService.save(contactMethod);
         return new ResponseEntity<>(savedContactMethod, HttpStatus.CREATED);
     }
 
@@ -140,12 +140,12 @@ public class ContactMethodController {
      * Updates the existing ContactMethod record by using the given details.
      *
      * @param id            the id of the ContactMethod to be updated.
-     * @param ContactMethod the ContactMethod  object which contains the update details
+     * @param contactMethod the ContactMethod  object which contains the update details
      * @return the Response Entity with update ContactMethod details.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<ContactMethod> update(@PathVariable Long id, @Valid @RequestBody ContactMethod ContactMethod) {
-        ContactMethod updatedContactMethod = contactMethodService.update(id, ContactMethod);
+    public ResponseEntity<ContactMethod> update(@PathVariable Long id, @Valid @RequestBody ContactMethod contactMethod) {
+        ContactMethod updatedContactMethod = contactMethodService.update(id, contactMethod);
         return new ResponseEntity<>(updatedContactMethod, HttpStatus.OK);
     }
 }

@@ -115,12 +115,12 @@ public class TransactionTypeController {
     /**
      * Endpoint to save a new TransactionType.
      *
-     * @param TransactionType The TransactionType object representing the TransactionType data to be saved.
+     * @param transactionType The TransactionType object representing the TransactionType data to be saved.
      * @return ResponseEntity with the saved TransactionType and HTTP status.
      */
     @PostMapping("/save")
-    public ResponseEntity<TransactionType> save(@Valid @RequestBody TransactionType TransactionType) {
-        TransactionType savedTransactionType = transactionTypeService.save(TransactionType);
+    public ResponseEntity<TransactionType> save(@Valid @RequestBody TransactionType transactionType) {
+        TransactionType savedTransactionType = transactionTypeService.save(transactionType);
         return new ResponseEntity<>(savedTransactionType, HttpStatus.CREATED);
     }
 
@@ -137,15 +137,15 @@ public class TransactionTypeController {
     }
 
     /**
-     * Updates the existing TransactionType record by using the given details.
+     * Updates the existing transactionType record by using the given details.
      *
-     * @param id              the id of the TransactionType to be updated.
-     * @param TransactionType the TransactionType  object which contains the update details
-     * @return the Response Entity with update TransactionType details.
+     * @param id              the id of the transactionType to be updated.
+     * @param transactionType the transactionType  object which contains the update details
+     * @return the Response Entity with update transactionType details.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<TransactionType> update(@PathVariable Long id, @Valid @RequestBody TransactionType TransactionType) {
-        TransactionType updatedTransactionType = transactionTypeService.update(id, TransactionType);
+    public ResponseEntity<TransactionType> update(@PathVariable Long id, @Valid @RequestBody TransactionType transactionType) {
+        TransactionType updatedTransactionType = transactionTypeService.update(id, transactionType);
         return new ResponseEntity<>(updatedTransactionType, HttpStatus.OK);
     }
 }

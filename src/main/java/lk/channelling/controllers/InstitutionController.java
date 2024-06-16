@@ -115,12 +115,12 @@ public class InstitutionController {
     /**
      * Endpoint to save a new Institution.
      *
-     * @param Institution The Institution object representing the Institution data to be saved.
+     * @param institution The Institution object representing the Institution data to be saved.
      * @return ResponseEntity with the saved Institution and HTTP status.
      */
     @PostMapping("/save")
-    public ResponseEntity<Institution> save(@Valid @RequestBody Institution Institution) {
-        Institution savedInstitution = institutionService.save(Institution);
+    public ResponseEntity<Institution> save(@Valid @RequestBody Institution institution) {
+        Institution savedInstitution = institutionService.save(institution);
         return new ResponseEntity<>(savedInstitution, HttpStatus.CREATED);
     }
 

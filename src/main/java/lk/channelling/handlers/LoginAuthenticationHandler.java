@@ -34,6 +34,9 @@ import lombok.Setter;
  */
 public class LoginAuthenticationHandler {
 
+    private LoginAuthenticationHandler() {
+    }
+
     /**
      * The singleton instance of the class.
      */
