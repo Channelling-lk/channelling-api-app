@@ -5,12 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "doctor_ratings")
 @Data
-public class DoctorRating extends BaseEntity {
+public class DoctorRating extends BaseEntity implements Serializable {
 
     @Column(name = "patient_id", nullable = false)
     private Long patientId;
