@@ -1,9 +1,12 @@
 package lk.channelling.services.impl;
 
 import lk.channelling.entity.Payment;
+import lk.channelling.enums.Status;
 import lk.channelling.exception.RecordNotFoundException;
+import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.PaymentRepository;
 import lk.channelling.services.PaymentService;
+import lk.channelling.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +41,11 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Payment save(Payment payment) {
+        LoginAuthenticationHandler.validateUser();
+
+        payment.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        payment.setStatus(Status.ACTIVE);
+        payment.setCreatedDate(TimeUtil.getCurrentTimeStamp());
         return paymentRepository.save(payment);
     }
 

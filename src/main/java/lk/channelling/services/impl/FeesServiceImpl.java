@@ -1,9 +1,12 @@
 package lk.channelling.services.impl;
 
 import lk.channelling.entity.Fees;
+import lk.channelling.enums.Status;
 import lk.channelling.exception.RecordNotFoundException;
+import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.FeesRepository;
 import lk.channelling.services.FeesService;
+import lk.channelling.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +41,11 @@ public class FeesServiceImpl implements FeesService {
 
     @Override
     public Fees save(Fees fees) {
+        LoginAuthenticationHandler.validateUser();
+
+        fees.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        fees.setStatus(Status.ACTIVE);
+        fees.setCreatedDate(TimeUtil.getCurrentTimeStamp());
         return feesRepository.save(fees);
     }
 

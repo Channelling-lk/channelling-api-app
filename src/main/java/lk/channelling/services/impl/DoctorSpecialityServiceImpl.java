@@ -1,9 +1,12 @@
 package lk.channelling.services.impl;
 
 import lk.channelling.entity.DoctorSpeciality;
+import lk.channelling.enums.Status;
 import lk.channelling.exception.RecordNotFoundException;
+import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.DoctorSpecialityRepository;
 import lk.channelling.services.DoctorSpecialityService;
+import lk.channelling.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +41,11 @@ public class DoctorSpecialityServiceImpl implements DoctorSpecialityService {
 
     @Override
     public DoctorSpeciality save(DoctorSpeciality doctorSpeciality) {
+        LoginAuthenticationHandler.validateUser();
+
+        doctorSpeciality.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        doctorSpeciality.setStatus(Status.ACTIVE);
+        doctorSpeciality.setCreatedDate(TimeUtil.getCurrentTimeStamp());
         return doctorSpecialityRepository.save(doctorSpeciality);
     }
 

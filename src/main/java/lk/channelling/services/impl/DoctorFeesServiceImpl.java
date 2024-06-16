@@ -16,9 +16,12 @@
 package lk.channelling.services.impl;
 
 import lk.channelling.entity.DoctorFees;
+import lk.channelling.enums.Status;
 import lk.channelling.exception.RecordNotFoundException;
+import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.DoctorFeesRepository;
 import lk.channelling.services.DoctorFeesService;
+import lk.channelling.util.TimeUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +56,11 @@ public class DoctorFeesServiceImpl implements DoctorFeesService {
 
     @Override
     public DoctorFees save(DoctorFees doctorFees) {
+        LoginAuthenticationHandler.validateUser();
+
+        doctorFees.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        doctorFees.setStatus(Status.ACTIVE);
+        doctorFees.setCreatedDate(TimeUtil.getCurrentTimeStamp());
         return doctorFeesRepository.save(doctorFees);
     }
 
@@ -70,9 +78,9 @@ public class DoctorFeesServiceImpl implements DoctorFeesService {
             doctorFees.setEffectiveFrom(newDoctorFees.getEffectiveFrom());
             doctorFees.setEffectiveTo(newDoctorFees.getEffectiveTo());
             doctorFees.setStatus(newDoctorFees.getStatus());
-            doctorFees.setModifiedUser(newDoctorFees.getModifiedUser());
-            doctorFees.setModifiedDate(newDoctorFees.getModifiedDate());
-            doctorFees.setVersion(newDoctorFees.getVersion());
+            doctorFees.setModifiedUser(LoginAuthenticationHandler.getUserName());
+            doctorFees.setModifiedDate(TimeUtil.getCurrentTimeStamp());
+
             doctorFees.setDoctorId(newDoctorFees.getDoctorId());
             return doctorFeesRepository.save(doctorFees);
         });

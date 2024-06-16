@@ -17,9 +17,12 @@
 package lk.channelling.services.impl;
 
 import lk.channelling.entity.Appointment;
+import lk.channelling.enums.Status;
 import lk.channelling.exception.RecordNotFoundException;
+import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.AppointmentRepository;
 import lk.channelling.services.AppointmentService;
+import lk.channelling.util.TimeUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +57,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Appointment save(Appointment appointment) {
+        LoginAuthenticationHandler.validateUser();
+
+        appointment.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        appointment.setStatus(Status.ACTIVE);
+        appointment.setCreatedDate(TimeUtil.getCurrentTimeStamp());
         return appointmentRepository.save(appointment);
     }
 
@@ -70,9 +78,8 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setPatientId(newAppointment.getPatientId());
             appointment.setSessionId(newAppointment.getSessionId());
             appointment.setStatus(newAppointment.getStatus());
-            appointment.setModifiedUser(newAppointment.getModifiedUser());
-            appointment.setModifiedDate(newAppointment.getModifiedDate());
-            appointment.setVersion(newAppointment.getVersion());
+            appointment.setModifiedUser(LoginAuthenticationHandler.getUserName());
+            appointment.setModifiedDate(TimeUtil.getCurrentTimeStamp());
             return appointmentRepository.save(appointment);
         });
         if (updatedAppointment.isPresent()) return updatedAppointment.get();

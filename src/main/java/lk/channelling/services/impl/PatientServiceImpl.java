@@ -17,9 +17,12 @@
 package lk.channelling.services.impl;
 
 import lk.channelling.entity.Patient;
+import lk.channelling.enums.Status;
 import lk.channelling.exception.RecordNotFoundException;
+import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.PatientRepository;
 import lk.channelling.services.PatientService;
+import lk.channelling.util.TimeUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +57,11 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient save(Patient patient) {
+        LoginAuthenticationHandler.validateUser();
+
+        patient.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        patient.setStatus(Status.ACTIVE);
+        patient.setCreatedDate(TimeUtil.getCurrentTimeStamp());
         return patientRepository.save(patient);
     }
 
@@ -82,8 +90,8 @@ public class PatientServiceImpl implements PatientService {
             patient.setGender(newPatient.getGender());
             patient.setTitleId(newPatient.getTitleId());
             patient.setStatus(newPatient.getStatus());
-            patient.setModifiedUser(newPatient.getModifiedUser());
-            patient.setModifiedDate(newPatient.getModifiedDate());
+            patient.setModifiedUser(LoginAuthenticationHandler.getUserName());
+            patient.setModifiedDate(TimeUtil.getCurrentTimeStamp());
             patient.setVersion(newPatient.getVersion());
             return patientRepository.save(patient);
         });

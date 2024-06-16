@@ -1,9 +1,12 @@
 package lk.channelling.services.impl;
 
 import lk.channelling.entity.RatingCategory;
+import lk.channelling.enums.Status;
 import lk.channelling.exception.RecordNotFoundException;
+import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.RatingCategoryRepository;
 import lk.channelling.services.RatingCategoryService;
+import lk.channelling.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,6 +41,11 @@ public class RatingCategoryServiceImpl implements RatingCategoryService {
 
     @Override
     public RatingCategory save(RatingCategory ratingCategory) {
+        LoginAuthenticationHandler.validateUser();
+
+        ratingCategory.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        ratingCategory.setStatus(Status.ACTIVE);
+        ratingCategory.setCreatedDate(TimeUtil.getCurrentTimeStamp());
         return ratingCategoryRepository.save(ratingCategory);
     }
 

@@ -17,9 +17,12 @@
 package lk.channelling.services.impl;
 
 import lk.channelling.entity.DoctorSession;
+import lk.channelling.enums.Status;
 import lk.channelling.exception.RecordNotFoundException;
+import lk.channelling.handlers.LoginAuthenticationHandler;
 import lk.channelling.repository.DoctorSessionRepository;
 import lk.channelling.services.DoctorSessionService;
+import lk.channelling.util.TimeUtil;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,6 +57,11 @@ public class DoctorSessionServiceImpl implements DoctorSessionService {
 
     @Override
     public DoctorSession save(DoctorSession doctorSession) {
+        LoginAuthenticationHandler.validateUser();
+
+        doctorSession.setCreatedUser(LoginAuthenticationHandler.getUserName());
+        doctorSession.setStatus(Status.ACTIVE);
+        doctorSession.setCreatedDate(TimeUtil.getCurrentTimeStamp());
         return doctorSessionRepository.save(doctorSession);
     }
 
@@ -71,9 +79,12 @@ public class DoctorSessionServiceImpl implements DoctorSessionService {
             doctorSession.setSessionDateTime(newDoctorSession.getSessionDateTime());
             doctorSession.setMaxPatients(newDoctorSession.getMaxPatients());
             doctorSession.setStatus(newDoctorSession.getStatus());
-            doctorSession.setModifiedUser(newDoctorSession.getModifiedUser());
-            doctorSession.setModifiedDate(newDoctorSession.getModifiedDate());
-            doctorSession.setVersion(newDoctorSession.getVersion());
+            LoginAuthenticationHandler.validateUser();
+
+            doctorSession.setCreatedUser(LoginAuthenticationHandler.getUserName());
+            doctorSession.setStatus(Status.ACTIVE);
+            doctorSession.setCreatedDate(TimeUtil.getCurrentTimeStamp());
+
             doctorSession.setTotalFee(newDoctorSession.getTotalFee());
             return doctorSessionRepository.save(doctorSession);
         });
