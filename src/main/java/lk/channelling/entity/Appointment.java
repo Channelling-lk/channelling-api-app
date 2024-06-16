@@ -16,6 +16,7 @@
 
 package lk.channelling.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,11 +36,14 @@ public class Appointment extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "appointment_status", nullable = false)
+    @JsonProperty("appointment_status")
     private String appointmentStatus;
 
+    @JsonProperty("patient_id")
     @Column(name = "patient_id", nullable = false)
     private int patientId;
 
+    @JsonProperty("session_id")
     @Column(name = "session_id", nullable = false)
     private int sessionId;
 

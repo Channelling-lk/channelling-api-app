@@ -16,6 +16,7 @@
 
 package lk.channelling.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -56,5 +57,6 @@ public class State extends BaseEntity implements Serializable {
     @Valid
     @NotNull(message = "Error: Country is required.")
     @Column(name = "country_id", nullable = false)
+    @JsonProperty("country_id")
     private Long countryId;
 }

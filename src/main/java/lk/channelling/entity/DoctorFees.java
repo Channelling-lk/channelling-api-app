@@ -15,6 +15,7 @@
  */
 package lk.channelling.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,14 +39,18 @@ public class DoctorFees extends BaseEntity implements Serializable {
     private double amount;
 
     @Column(name = "transaction_id", nullable = false)
+    @JsonProperty("transaction_id")
     private int transactionId;
 
     @Column(name = "effective_from", nullable = false)
+    @JsonProperty("effective_from")
     private LocalDateTime effectiveFrom;
 
     @Column(name = "effective_to")
+    @JsonProperty("effective_to")
     private LocalDateTime effectiveTo;
 
     @Column(name = "doctor_id", nullable = false)
+    @JsonProperty("doctor_id")
     private int doctorId;
 }

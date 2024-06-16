@@ -16,6 +16,7 @@
 
 package lk.channelling.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -52,34 +53,41 @@ public class Doctor extends BaseEntity implements Serializable {
     @NotBlank(message = "Error: First Name is required.")
     @Size(max = 255, message = "Error: First Name must be less than {value} characters.")
     @Column(name = "first_name", nullable = false)
+    @JsonProperty("first_name")
     private String firstName;
 
     @NotBlank(message = "Error: Last Name is required.")
     @Size(max = 255, message = "Error: Last Name must be less than {value} characters.")
     @Column(name = "last_name", nullable = false)
+    @JsonProperty("last_name")
     private String lastName;
 
     @Size(max = 255, message = "Error: Display Name must be less than {value} characters.")
     @Column(name = "display_name", nullable = false)
+    @JsonProperty("display_name")
     private String displayName;
 
     @NotBlank(message = "Error. Identification method is required.")
     @Size(max = 50, message = "Error: Identification Method must be less than {value} characters.")
     @Column(name = "identification_method", nullable = false)
+    @JsonProperty("identification_method")
     @Enumerated(EnumType.STRING)
     private IdentificationMethod identificationMethod;
 
     @NotBlank(message = "Error. Identification Value is required.")
     @Size(max = 20, message = "Error. Identification Value must be less than {value} characters.")
     @Column(name = "identification_value", nullable = false)
+    @JsonProperty("identification_value")
     private String identificationValue;
 
     @Size(max = 20, message = "Error. Mobile No 1 must be less than {value} digits.")
     @Column(name = "mobile_no1")
+    @JsonProperty("mobile_no1")
     private String mobileNo1;
 
     @Size(max = 20, message = "Error. Mobile No 2 must be less than {value} digits.")
     @Column(name = "mobile_no2")
+    @JsonProperty("mobile_no2")
     private String mobileNo2;
 
     @Size(max = 20, message = "Error. Email Address must be less than {value} digits.")
@@ -88,22 +96,27 @@ public class Doctor extends BaseEntity implements Serializable {
 
     @Size(max = 255, message = "Error: Address Line 1 must be less than {value} characters.")
     @Column(name = "address_line1", nullable = false)
+    @JsonProperty("address_line1")
     private String addressLine1;
 
     @Size(max = 255, message = "Error: Address Line 2 must be less than {value} characters.")
     @Column(name = "address_line2", nullable = false)
+    @JsonProperty("address_line2")
     private String addressLine2;
 
     @Size(max = 255, message = "Error: Address Line 3 must be less than {value} characters.")
     @Column(name = "address_line3", nullable = false)
+    @JsonProperty("address_line3")
     private String addressLine3;
 
     @Valid
     @NotNull(message = "Error: City ID is required.")
     @Column(name = "city_id", nullable = false)
+    @JsonProperty("city_id")
     private Long cityId;
 
     @Column(name = "date_of_birth")
+    @JsonProperty("date_of_birth")
     private Date dateOfBirth;
 
     @Size(max = 10, message = "Error. Gender must be less then {value} characters.")
@@ -114,10 +127,12 @@ public class Doctor extends BaseEntity implements Serializable {
     @NotBlank(message = "Error. Doctor Registration No is required.")
     @Size(max = 100, message = "Error: Doctor Registration No must be less than {value} characters.")
     @Column(name = "doc_reg_no", nullable = false)
+    @JsonProperty("doc_reg_no")
     private String doctorRegistrationNo;
 
     @Valid
     @NotNull(message = "Error: Title ID is required.")
     @Column(name = "title_id", nullable = false)
+    @JsonProperty("title_id")
     private Long titleId;
 }

@@ -16,6 +16,7 @@
 
 package lk.channelling.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,29 +56,36 @@ public class Hospital extends BaseEntity implements Serializable {
 
     @Size(max = 255, message = "Error: Display Name must be less than {value} characters.")
     @Column(name = "display_name", nullable = false)
+    @JsonProperty("display_name")
     private String displayName;
 
     @Size(max = 100, message = "Error: Business Registration No must be less than {value} characters.")
     @Column(name = "br_no", nullable = false)
+    @JsonProperty("br_no")
     private String brNo;
 
     @Size(max = 255, message = "Error: Address Line 1 must be less than {value} characters.")
     @Column(name = "address_line1", nullable = false)
+    @JsonProperty("address_line1")
     private String addressLine1;
 
     @Size(max = 255, message = "Error: Address Line 2 must be less than {value} characters.")
     @Column(name = "address_line2", nullable = false)
+    @JsonProperty("address_line2")
     private String addressLine2;
 
     @Size(max = 255, message = "Error: Address Line 3 must be less than {value} characters.")
     @Column(name = "address_line3", nullable = false)
+    @JsonProperty("address_line3")
     private String addressLine3;
 
     @Column(name = "hospital_fee")
+    @JsonProperty("hospital_fee")
     private Double hospitalFee;
 
     @Valid
     @NotNull(message = "Error: City ID is required.")
     @Column(name = "city_id", nullable = false)
+    @JsonProperty("city_id")
     private Long cityId;
 }

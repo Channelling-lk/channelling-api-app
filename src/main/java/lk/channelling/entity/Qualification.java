@@ -16,6 +16,7 @@
 
 package lk.channelling.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,5 +50,6 @@ public class Qualification extends DefinitionBaseEntity implements Serializable 
     @Valid
     @NotNull(message = "Error: Qualification Level is required.")
     @Column(name = "qualification_level_id", nullable = false)
+    @JsonProperty("qualification_level_id")
     private Long qualificationLevelId;
 }

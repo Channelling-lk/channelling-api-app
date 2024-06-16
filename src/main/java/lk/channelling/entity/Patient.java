@@ -15,6 +15,7 @@
  */
 package lk.channelling.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,48 +36,61 @@ public class Patient extends BaseEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "first_name", nullable = false)
+    @JsonProperty("first_name")
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
+    @JsonProperty("last_name")
     private String lastName;
 
     @Column(name = "display_name", nullable = false)
+    @JsonProperty("display_name")
     private String displayName;
 
     @Column(name = "identification_method", nullable = false)
+    @JsonProperty("identification_method")
     private String identificationMethod;
 
     @Column(name = "identification_value", nullable = false)
+    @JsonProperty("identification_value")
     private String identificationValue;
 
     @Column(name = "mobile_no1")
+    @JsonProperty("mobile_no1")
     private String mobileNo1;
 
     @Column(name = "mobile_no2")
+    @JsonProperty("mobile_no2")
     private String mobileNo2;
 
     @Column(name = "email")
     private String email;
 
     @Column(name = "address_line1")
+    @JsonProperty("address_line1")
     private String addressLine1;
 
     @Column(name = "address_line2")
+    @JsonProperty("address_line2")
     private String addressLine2;
 
     @Column(name = "address_line3")
+    @JsonProperty("address_line3")
     private String addressLine3;
 
     @Column(name = "city_id", nullable = false)
+    @JsonProperty("city_id")
     private int cityId;
 
     @Column(name = "date_of_birth")
+    @JsonProperty("date_of_birth")
     private LocalDate dateOfBirth;
 
     @Column(name = "gender", nullable = false)
     private String gender;
 
     @Column(name = "title_id")
+    @JsonProperty("title_id")
     private int titleId;
 
 }

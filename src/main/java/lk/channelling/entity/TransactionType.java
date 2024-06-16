@@ -16,6 +16,7 @@
 
 package lk.channelling.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,11 +50,13 @@ public class TransactionType extends DefinitionBaseEntity implements Serializabl
     @Valid
     @NotNull(message = "Error: Calculation Method is required.")
     @Column(name = "calculation_method", nullable = false)
+    @JsonProperty("calculation_method")
     private String calculationMethod;
 
     @Valid
     @NotNull(message = "Error. Rate or Amount is required.")
     @Column(name = "amount_rate", nullable = false)
+    @JsonProperty("amount_rate")
     private Double amountRate;
 
 }

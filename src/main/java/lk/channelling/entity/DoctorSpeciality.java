@@ -16,6 +16,7 @@
 
 package lk.channelling.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,10 +50,12 @@ public class DoctorSpeciality extends BaseEntity implements Serializable {
     @Valid
     @NotNull(message = "Error: Doctor Name is required.")
     @Column(name = "doctor_id", nullable = false)
+    @JsonProperty("doctor_id")
     private Long doctorId;
 
     @Valid
     @NotNull(message = "Error: Speciality is required.")
     @Column(name = "speciality_id", nullable = false)
+    @JsonProperty("speciality_id")
     private Long specialityId;
 }
