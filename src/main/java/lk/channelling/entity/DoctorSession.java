@@ -44,6 +44,6 @@ public class DoctorSession extends BaseEntity implements Serializable {
     @Column(name = "max_patients")
     private int maxPatients;
 
-    @Column(name = "total_fee", precision = 16, scale = 4)
+    @Column(name = "total_fee")
     private double totalFee;
 }
