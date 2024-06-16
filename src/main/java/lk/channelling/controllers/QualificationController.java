@@ -115,12 +115,12 @@ public class QualificationController {
     /**
      * Endpoint to save a new Qualification.
      *
-     * @param Qualification The Qualification object representing the Qualification data to be saved.
+     * @param qualification The Qualification object representing the Qualification data to be saved.
      * @return ResponseEntity with the saved Qualification and HTTP status.
      */
     @PostMapping("/save")
-    public ResponseEntity<Qualification> save(@Valid @RequestBody Qualification Qualification) {
-        Qualification savedQualification = qualificationService.save(Qualification);
+    public ResponseEntity<Qualification> save(@Valid @RequestBody Qualification qualification) {
+        Qualification savedQualification = qualificationService.save(qualification);
         return new ResponseEntity<>(savedQualification, HttpStatus.CREATED);
     }
 

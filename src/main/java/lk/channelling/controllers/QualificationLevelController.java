@@ -113,14 +113,14 @@ public class QualificationLevelController {
     }
 
     /**
-     * Endpoint to save a new QualificationLevel.
+     * Endpoint to save a new qualificationLevel.
      *
-     * @param QualificationLevel The QualificationLevel object representing the QualificationLevel data to be saved.
-     * @return ResponseEntity with the saved QualificationLevel and HTTP status.
+     * @param qualificationLevel The qualificationLevel object representing the qualificationLevel data to be saved.
+     * @return ResponseEntity with the saved qualificationLevel and HTTP status.
      */
     @PostMapping("/save")
-    public ResponseEntity<QualificationLevel> save(@Valid @RequestBody QualificationLevel QualificationLevel) {
-        QualificationLevel savedQualificationLevel = qualificationLevelService.save(QualificationLevel);
+    public ResponseEntity<QualificationLevel> save(@Valid @RequestBody QualificationLevel qualificationLevel) {
+        QualificationLevel savedQualificationLevel = qualificationLevelService.save(qualificationLevel);
         return new ResponseEntity<>(savedQualificationLevel, HttpStatus.CREATED);
     }
 
@@ -140,12 +140,12 @@ public class QualificationLevelController {
      * Updates the existing QualificationLevel record by using the given details.
      *
      * @param id                 the id of the QualificationLevel to be updated.
-     * @param QualificationLevel the QualificationLevel  object which contains the update details
+     * @param qualificationLevel the QualificationLevel  object which contains the update details
      * @return the Response Entity with update QualificationLevel details.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<QualificationLevel> update(@PathVariable Long id, @Valid @RequestBody QualificationLevel QualificationLevel) {
-        QualificationLevel updatedQualificationLevel = qualificationLevelService.update(id, QualificationLevel);
+    public ResponseEntity<QualificationLevel> update(@PathVariable Long id, @Valid @RequestBody QualificationLevel qualificationLevel) {
+        QualificationLevel updatedQualificationLevel = qualificationLevelService.update(id, qualificationLevel);
         return new ResponseEntity<>(updatedQualificationLevel, HttpStatus.OK);
     }
 }

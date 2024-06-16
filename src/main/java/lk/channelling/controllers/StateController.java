@@ -121,7 +121,7 @@ public class StateController {
      * @return the Response Entity with NO CONTENT response.
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteInstitution(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         stateService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
@@ -130,12 +130,12 @@ public class StateController {
      * Updates the existing State record by using the given details.
      *
      * @param id          the id of the State to be updated.
-     * @param institution the State  object which contains the update details
+     * @param state the State  object which contains the update details
      * @return the Response Entity with update State details.
      */
     @PutMapping("/{id}")
-    public ResponseEntity<State> update(@PathVariable Long id, @Valid @RequestBody State institution) {
-        State updatedInstitution = stateService.update(id, institution);
+    public ResponseEntity<State> update(@PathVariable Long id, @Valid @RequestBody State state) {
+        State updatedInstitution = stateService.update(id, state);
         return new ResponseEntity<>(updatedInstitution, HttpStatus.OK);
     }
 

@@ -102,14 +102,14 @@ public class CityController {
     }
 
     /**
-     * Endpoint to save a new City.
+     * Endpoint to save a new city.
      *
-     * @param City The City object representing the City data to be saved.
-     * @return ResponseEntity with the saved City and HTTP status.
+     * @param city The city object representing the city data to be saved.
+     * @return ResponseEntity with the saved city and HTTP status.
      */
     @PostMapping("/save")
-    public ResponseEntity<City> save(@Valid @RequestBody City City) {
-        City savedInstitution = cityService.save(City);
+    public ResponseEntity<City> save(@Valid @RequestBody City city) {
+        City savedInstitution = cityService.save(city);
         return new ResponseEntity<>(savedInstitution, HttpStatus.CREATED);
     }
 

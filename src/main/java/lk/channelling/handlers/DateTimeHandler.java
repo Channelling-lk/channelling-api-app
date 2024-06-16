@@ -42,6 +42,9 @@ import java.time.format.DateTimeParseException;
  */
 public class DateTimeHandler {
 
+    private DateTimeHandler() {
+    }
+
     /**
      * Default pattern to format date time.
      */
